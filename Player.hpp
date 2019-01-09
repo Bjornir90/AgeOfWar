@@ -11,13 +11,18 @@
 class Player {
 private:
     int money, team, hp;
-    static Player players [];
+    static Player players [2];
 
 public:
     static void addRewardMoney(const Unit &killed);
     static Player& getInstance(int team);
 
+    int getMoney() const;
+
     Player(int money, int team, int hp);
+    static void addPlayer(Player toAdd, int index){
+        players[index] =
+    }
 };
 
 
