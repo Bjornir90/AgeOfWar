@@ -1,3 +1,4 @@
+
 //
 // Created by bjornir on 09/01/19.
 //
@@ -7,6 +8,12 @@
 
 
 class Unit {
+protected:
+    int hp, initialhp, attackpower, price;
+    Battlefield * battlefield;
+    virtual void resolveAttack() = 0;
+    virtual void resolveMovement() = 0;
+    virtual void hurt(int damage) = 0;
 
 };
 
