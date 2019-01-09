@@ -15,7 +15,7 @@ protected:
     Battlefield& battlefield;
     virtual void resolveAttack() = 0;
     virtual void resolveMovement() = 0;
-    virtual void hurt(int damage) = 0;
+    void hurt(int damage);
 public:
     int getHp() const;
 

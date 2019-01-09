@@ -13,7 +13,6 @@ class Soldier : public Unit{
 protected:
     void resolveAttack();
     void resolveMovement();
-    void hurt(int damage);
 
 public:
     Soldier(Battlefield& bf, int team) : Unit(10, 10, 4, 10, team, Battlefield& bf) {
