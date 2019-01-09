@@ -5,6 +5,8 @@
 
 #ifndef AGEOFWAR_UNIT_HPP
 #define AGEOFWAR_UNIT_HPP
+#include "Battlefield.hpp"
+
 
 
 class Unit {
@@ -24,6 +26,8 @@ public:
     int getPrice() const;
 
     int getTeam() const;
+
+    Unit(int hp, int initialhp, int attackpower, int price, int team, Battlefield &battlefield);
 };
 
 

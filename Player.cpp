@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include "Player.hpp"
 
-void Player::addRewardMoney(Unit &killed) {
+void Player::addRewardMoney(const Unit &killed) {
     int playerTeam = abs(killed.getTeam()-1);
     Player& playerThatGotReward = Player::getInstance(playerTeam);
     playerThatGotReward.money += killed.getPrice()/2;
@@ -14,3 +14,5 @@ void Player::addRewardMoney(Unit &killed) {
 Player& Player::getInstance(int team) {
     return players[team];
 }
+
+Player::Player(int money, int team, int hp) : money(money), team(team), hp(hp) {}

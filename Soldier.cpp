@@ -3,3 +3,13 @@
 //
 
 #include "Soldier.hpp"
+#include "Player.hpp"
+
+void Soldier::hurt(int damage){
+    hp -= damage;
+    if(hp<1){
+        Player::addRewardMoney(*((Unit*)this));
+        battlefield
+    }
+
+}

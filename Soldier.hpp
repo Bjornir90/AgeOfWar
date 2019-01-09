@@ -7,24 +7,16 @@
 
 
 #include "Unit.hpp"
+#include "Battlefield.hpp"
 
 class Soldier : public Unit{
 protected:
     void resolveAttack();
     void resolveMovement();
-    void hurt(int damage){
-        hp -= damage;
-        if(hp<1){
-
-        }
-    }
+    void hurt(int damage);
 
 public:
-    Soldier(Battlefield& bf) : battlefield(bf) {
-        initialhp = 10;
-        hp = initialhp;
-        attackpower = 4;
-        price = 10;
+    Soldier(Battlefield& bf, int team) : Unit(10, 10, 4, 10, team, Battlefield& bf) {
     }
 };
 

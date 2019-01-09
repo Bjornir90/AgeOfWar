@@ -24,3 +24,6 @@ int Unit::getTeam() const {
     return team;
 }
 
+Unit::Unit(int hp, int initialhp, int attackpower, int price, int team, Battlefield &battlefield) : hp(hp), initialhp(
+        initialhp), attackpower(attackpower), price(price), team(team), battlefield(battlefield) {}
+
