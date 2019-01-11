@@ -8,6 +8,3 @@ void Catapult::resolveAttack() {
 
 }
 
-void Catapult::resolveMovement() {
-
-}

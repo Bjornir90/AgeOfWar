@@ -12,7 +12,6 @@
 class Soldier : public Unit{
 protected:
     void resolveAttack();
-    void resolveMovement();
 
 public:
     Soldier(Player * owner) : Unit(10, 10, 4, 10, owner) {

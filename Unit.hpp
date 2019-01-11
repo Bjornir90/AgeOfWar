@@ -14,10 +14,10 @@ protected:
     int hp, initialhp, attackpower, price, position;
     Player * owner;
     virtual void resolveAttack() = 0;
-    virtual void resolveMovement() = 0;
 
-    int hurt(int damage);
 public:
+    int hurt(int damage);
+
     int getHp() const;
 
     int getInitialhp() const;

@@ -15,13 +15,13 @@ protected:
     bool spendMoney(int amount);
     BattlefieldAccessor * bf;
 public:
-    void addRewardMoney(const Unit &killed);
+    void addRewardMoney(int reward);
 
     int getMoney() const;
 
     virtual Unit * getNextBuy() = 0;
 
-
+    BattlefieldAccessor *getBf() const;
 
 
     Player(int money, int team, int hp, BattlefieldAccessor * bf);

@@ -11,7 +11,6 @@
 class Catapult : public Unit{
 protected:
     void resolveAttack();
-    void resolveMovement();
 
 public:
     Catapult(Player * owner) : Unit(12, 12, 6, 20, owner) {
