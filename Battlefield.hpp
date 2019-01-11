@@ -10,6 +10,7 @@ protected:
 public:
   virtual Unit*& operator [] (int idx) = 0;
   bool moveFwd(int idx);
+  void kill(int idx);
 };
 
 class BattlefieldLeftAccessor : public BattlefieldAccessor {

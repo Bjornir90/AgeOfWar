@@ -1,5 +1,6 @@
 #include "Battlefield.hpp"
 #include <stdexcept>
+#include "Unit.hpp"
 
 Battlefield::Battlefield() : leftAccess(field), rightAccess(field) {
   for(unsigned int i = 0; i < FIELD_SIZE; i++) field[i] = NULL;
@@ -23,5 +24,12 @@ bool BattlefieldAccessor::moveFwd (int idx) {
   (*this)[idx+1] = (*this)[idx];
   (*this)[idx] = NULL;
   return true;
+}
+
+void BattlefieldAccessor::kill (int idx) {
+  Unit*& u = (*this)[idx];
+  if(u == NULL) return;
+  delete u;
+  u = NULL;
 }
 

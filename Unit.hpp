@@ -30,6 +30,8 @@ public:
 
     void setPosition(int position);
 
+    virtual ~Unit () = default;
+
     Unit(int hp, int initialhp, int attackpower, int price, Player * owner);
 };
 
