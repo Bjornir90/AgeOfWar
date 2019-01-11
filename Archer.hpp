@@ -14,7 +14,7 @@ protected:
     void resolveMovement();
 
 public:
-    Archer(Battlefield& bf, int team) : Unit(8, 8, 3, 12, team, Battlefield& bf) {
+    Archer() : Unit(8, 8, 3, 12) {
     }
 };
 

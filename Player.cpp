@@ -7,17 +7,17 @@
 
 
 void Player::addRewardMoney(const Unit &killed) {
-    int playerTeam = abs(killed.getTeam()-1);
-    Player& playerThatGotReward = Player::getInstance(playerTeam);
-    playerThatGotReward.money += killed.getPrice()/2;
-}
-
-Player& Player::getInstance(int team) {
-    return players[team];
+    this->money += killed.getPrice()/2;
 }
 
 Player::Player(int money, int team, int hp) : money(money), team(team), hp(hp) {}
 
 int Player::getMoney() const {
     return money;
+}
+
+bool Player::spendMoney(int amount) {
+    if(amount > money) return false;
+    money -= amount;
+    return true;
 }

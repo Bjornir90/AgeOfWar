@@ -15,7 +15,7 @@ protected:
     void resolveMovement();
 
 public:
-    Soldier(Battlefield& bf, int team) : Unit(10, 10, 4, 10, team, Battlefield& bf) {
+    Soldier() : Unit(10, 10, 4, 10) {
     }
 };
 

@@ -21,17 +21,18 @@ int Unit::getPrice() const {
     return price;
 }
 
-int Unit::getTeam() const {
-    return team;
-}
-
 void Unit::hurt(int damage){
     hp -= damage;
-    if(hp<1){
-        Player::addRewardMoney(*((Unit*)this));
-    }
 }
 
-Unit::Unit(int hp, int initialhp, int attackpower, int price, int team, Battlefield &battlefield) : hp(hp), initialhp(
-        initialhp), attackpower(attackpower), price(price), team(team), battlefield(battlefield) {}
+int Unit::getPosition() const {
+    return position;
+}
+
+void Unit::setPosition(int position) {
+    Unit::position = position;
+}
+
+Unit::Unit(int hp, int initialhp, int attackpower, int price) : hp(hp), initialhp(
+        initialhp), attackpower(attackpower), price(price), position(0) {}
 

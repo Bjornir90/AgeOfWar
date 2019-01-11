@@ -8,10 +8,9 @@
 
 #include "Player.hpp"
 
-class ArtificialIntelligence {
-private:
-    Player self;
-    Unit nextBuy();
+class ArtificialIntelligence : public Player {
+public:
+    Unit * getNextBuy();
 };
 
 

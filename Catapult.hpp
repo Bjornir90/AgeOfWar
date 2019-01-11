@@ -14,7 +14,7 @@ protected:
     void resolveMovement();
 
 public:
-    Catapult(Battlefield& bf, int team) : Unit(12, 12, 6, 20, team, Battlefield& bf) {
+    Catapult() : Unit(12, 12, 6, 20) {
     }
 
 };

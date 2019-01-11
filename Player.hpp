@@ -11,18 +11,19 @@
 class Player {
 private:
     int money, team, hp;
-    static Player players [2];
-
+protected:
+    bool spendMoney(int amount);
 public:
-    static void addRewardMoney(const Unit &killed);
-    static Player& getInstance(int team);
+    void addRewardMoney(const Unit &killed);
 
     int getMoney() const;
 
+    virtual Unit * getNextBuy() = 0;
+
+
+
+
     Player(int money, int team, int hp);
-    static void addPlayer(Player toAdd, int index){
-        players[index] =
-    }
 };
 
 

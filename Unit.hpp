@@ -11,8 +11,7 @@
 
 class Unit {
 protected:
-    int hp, initialhp, attackpower, price, team;
-    Battlefield& battlefield;
+    int hp, initialhp, attackpower, price, position;
     virtual void resolveAttack() = 0;
     virtual void resolveMovement() = 0;
     void hurt(int damage);
@@ -25,9 +24,11 @@ public:
 
     int getPrice() const;
 
-    int getTeam() const;
+    int getPosition() const;
 
-    Unit(int hp, int initialhp, int attackpower, int price, int team, Battlefield &battlefield);
+    void setPosition(int position);
+
+    Unit(int hp, int initialhp, int attackpower, int price);
 };
 
 
