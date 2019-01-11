@@ -1,16 +1,18 @@
+EXEC=ageOfWar
 CXX=g++
 CXXFLAGS=-Wall -Wextra -Werror -std=c++14
-OBJS=Battlefield.o Unit.o main.o
-EXEC=ageOfWar
+SRCS := $(shell ls *.cpp)
+OBJS := $(SRCS:.cpp=.o)
+DEPS := $(SRCS:.cpp=.d)
 
 all: $(EXEC)
 
 
-# header dependecies
--include $(OBJS:.o=.d)
-
+# dependency graph of included header files
 %.d: %.cpp
 	$(CXX) $(CXXFLAGS) -MM -MF $(patsubst %.o,%.d,$@) -o $@ $<
+
+-include $(DEPS)
 
 
 # compiler rules
