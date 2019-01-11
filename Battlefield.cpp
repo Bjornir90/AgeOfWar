@@ -1,5 +1,5 @@
 #include "Battlefield.hpp"
-#include <exception>
+#include <stdexcept>
 
 Battlefield::Battlefield() : leftAccess(field), rightAccess(field) {
   for(unsigned int i = 0; i < FIELD_SIZE; i++) field[i] = NULL;

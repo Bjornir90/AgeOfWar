@@ -20,3 +20,5 @@ Unit * ArtificialIntelligence::getNextBuy(){
         printf("Trolol tu es pauvre");
     }
 }
+
+ArtificialIntelligence::ArtificialIntelligence(int money, int team, int hp) : Player(money, team, hp) {}

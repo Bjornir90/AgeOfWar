@@ -11,6 +11,8 @@
 class ArtificialIntelligence : public Player {
 public:
     Unit * getNextBuy();
+
+    ArtificialIntelligence(int money, int team, int hp);
 };
 
 

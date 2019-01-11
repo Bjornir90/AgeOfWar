@@ -3,3 +3,11 @@
 //
 
 #include "Archer.hpp"
+
+void Archer::resolveAttack() {
+
+}
+
+void Archer::resolveMovement() {
+
+}

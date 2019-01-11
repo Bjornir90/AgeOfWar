@@ -11,6 +11,8 @@
 class Human : public Player{
 public:
     Unit * getNextBuy() override;
+
+    Human(int money, int team, int hp);
 };
 
 

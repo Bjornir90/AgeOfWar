@@ -4,3 +4,11 @@
 
 #include "Soldier.hpp"
 #include "Player.hpp"
+
+void Soldier::resolveAttack() {
+
+}
+
+void Soldier::resolveMovement() {
+
+}

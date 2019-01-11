@@ -32,3 +32,5 @@ Unit * Human::getNextBuy() {
     }
 }
 
+Human::Human(int money, int team, int hp) : Player(money, team, hp) {}
+

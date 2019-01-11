@@ -3,3 +3,11 @@
 //
 
 #include "Catapult.hpp"
+
+void Catapult::resolveAttack() {
+
+}
+
+void Catapult::resolveMovement() {
+
+}
