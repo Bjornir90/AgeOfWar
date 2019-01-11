@@ -15,7 +15,7 @@ protected:
     void resolveMovement();
 
 public:
-    Soldier() : Unit(10, 10, 4, 10) {
+    Soldier(Player * owner) : Unit(10, 10, 4, 10, owner) {
     }
 };
 

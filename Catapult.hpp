@@ -14,7 +14,7 @@ protected:
     void resolveMovement();
 
 public:
-    Catapult() : Unit(12, 12, 6, 20) {
+    Catapult(Player * owner) : Unit(12, 12, 6, 20, owner) {
     }
 
 };

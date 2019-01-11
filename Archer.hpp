@@ -14,7 +14,7 @@ protected:
     void resolveMovement();
 
 public:
-    Archer() : Unit(8, 8, 3, 12) {
+    Archer(Player* owner) : Unit(8, 8, 3, 12, owner) {
     }
 };
 

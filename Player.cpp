@@ -10,7 +10,7 @@ void Player::addRewardMoney(const Unit &killed) {
     this->money += killed.getPrice()/2;
 }
 
-Player::Player(int money, int team, int hp) : money(money), team(team), hp(hp) {}
+Player::Player(int money, int team, int hp, BattlefieldAccessor * bf) : money(money), team(team), hp(hp), bf(bf) {}
 
 int Player::getMoney() const {
     return money;

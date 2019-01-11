@@ -6,15 +6,17 @@
 #ifndef AGEOFWAR_UNIT_HPP
 #define AGEOFWAR_UNIT_HPP
 #include "Battlefield.hpp"
-
+#include "Player.hpp"
 
 
 class Unit {
 protected:
     int hp, initialhp, attackpower, price, position;
+    Player * owner;
     virtual void resolveAttack() = 0;
     virtual void resolveMovement() = 0;
-    void hurt(int damage);
+
+    int hurt(int damage);
 public:
     int getHp() const;
 
@@ -28,7 +30,7 @@ public:
 
     void setPosition(int position);
 
-    Unit(int hp, int initialhp, int attackpower, int price);
+    Unit(int hp, int initialhp, int attackpower, int price, Player * owner);
 };
 
 

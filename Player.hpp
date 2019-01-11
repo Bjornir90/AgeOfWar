@@ -13,6 +13,7 @@ private:
     int money, team, hp;
 protected:
     bool spendMoney(int amount);
+    BattlefieldAccessor * bf;
 public:
     void addRewardMoney(const Unit &killed);
 
@@ -23,7 +24,7 @@ public:
 
 
 
-    Player(int money, int team, int hp);
+    Player(int money, int team, int hp, BattlefieldAccessor * bf);
 };
 
 

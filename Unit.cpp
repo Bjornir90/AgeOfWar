@@ -21,8 +21,9 @@ int Unit::getPrice() const {
     return price;
 }
 
-void Unit::hurt(int damage){
+int Unit::hurt(int damage){
     hp -= damage;
+    return price/2;
 }
 
 int Unit::getPosition() const {
@@ -33,6 +34,6 @@ void Unit::setPosition(int position) {
     Unit::position = position;
 }
 
-Unit::Unit(int hp, int initialhp, int attackpower, int price) : hp(hp), initialhp(
-        initialhp), attackpower(attackpower), price(price), position(0) {}
+Unit::Unit(int hp, int initialhp, int attackpower, int price, Player * owner) : hp(hp), initialhp(
+        initialhp), attackpower(attackpower), price(price), position(0), owner(owner) {}
 
