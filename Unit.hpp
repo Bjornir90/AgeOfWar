@@ -15,8 +15,9 @@ protected:
     Player * owner;
     virtual void resolveAttack() = 0;
 
-    int hurt(int damage);
 public:
+    int hurt(int damage);
+
     int getHp() const;
 
     int getInitialhp() const;

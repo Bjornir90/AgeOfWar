@@ -6,8 +6,8 @@
 #include "Player.hpp"
 
 
-void Player::addRewardMoney(const Unit &killed) {
-    this->money += killed.getPrice()/2;
+void Player::addRewardMoney(int reward) {
+    this->money += reward;
 }
 
 Player::Player(int money, int team, int hp, BattlefieldAccessor * bf) : money(money), team(team), hp(hp), bf(bf) {}
@@ -20,4 +20,8 @@ bool Player::spendMoney(int amount) {
     if(amount > money) return false;
     money -= amount;
     return true;
+}
+
+BattlefieldAccessor *Player::getBf() const {
+    return bf;
 }
