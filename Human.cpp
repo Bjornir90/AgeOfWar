@@ -15,13 +15,13 @@ Unit * Human::getNextBuy() {
         std::cout<<"Entrez le nom de l'unité à acheter (nothing, catapult, soldier ou archer) :"<<std::endl;
         std::cin >> unitName;
         if (unitName == "catapult") {
-            Catapult *catapult = new Catapult();
+            Catapult *catapult = new Catapult(*this);
             if(spendMoney(catapult->getPrice())) return catapult;
         } else if (unitName == "archer") {
-            Archer *archer = new Archer();
+            Archer *archer = new Archer(*this);
             if(spendMoney(archer->getPrice())) return archer;
         } else if (unitName == "soldier") {
-            Soldier *soldier = new Soldier();
+            Soldier *soldier = new Soldier(*this);
             if(spendMoney(soldier->getPrice())) return soldier;
         } else if (unitName == "superunicorn") {
             //Spawn a special unit
@@ -32,5 +32,4 @@ Unit * Human::getNextBuy() {
     }
 }
 
-Human::Human(int money, int team, int hp) : Player(money, team, hp) {}
-
+Human::Human(int money, int hp, BattlefieldAccessor& bf) : Player(money, hp, bf) {}

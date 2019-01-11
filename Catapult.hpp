@@ -13,7 +13,7 @@ protected:
     void resolveAttack();
 
 public:
-    Catapult(Player * owner) : Unit(12, 12, 6, 20, owner) {
+    Catapult(Player& owner) : Unit(12, 12, 6, 20, owner) {
     }
 
 };

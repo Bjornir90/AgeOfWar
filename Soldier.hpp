@@ -7,14 +7,13 @@
 
 
 #include "Unit.hpp"
-#include "Battlefield.hpp"
 
 class Soldier : public Unit{
 protected:
     void resolveAttack();
 
 public:
-    Soldier(Player * owner) : Unit(10, 10, 4, 10, owner) {
+    Soldier(Player& owner) : Unit(10, 10, 4, 10, owner) {
     }
 };
 

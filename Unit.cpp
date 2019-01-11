@@ -3,7 +3,6 @@
 //
 
 #include "Unit.hpp"
-#include "Player.hpp"
 
 int Unit::getHp() const {
     return hp;
@@ -34,6 +33,5 @@ void Unit::setPosition(int position) {
     Unit::position = position;
 }
 
-Unit::Unit(int hp, int initialhp, int attackpower, int price, Player * owner) : hp(hp), initialhp(
+Unit::Unit(int hp, int initialhp, int attackpower, int price, Player& owner) : hp(hp), initialhp(
         initialhp), attackpower(attackpower), price(price), position(0), owner(owner) {}
-

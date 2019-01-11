@@ -12,7 +12,7 @@
 class Unit {
 protected:
     int hp, initialhp, attackpower, price, position;
-    Player * owner;
+    Player& owner;
     virtual void resolveAttack() = 0;
 
 public:
@@ -32,7 +32,7 @@ public:
 
     virtual ~Unit () = default;
 
-    Unit(int hp, int initialhp, int attackpower, int price, Player * owner);
+    Unit(int hp, int initialhp, int attackpower, int price, Player& owner);
 };
 
 

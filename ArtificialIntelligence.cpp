@@ -12,11 +12,11 @@ Unit * ArtificialIntelligence::getNextBuy(){
     int currentMoney = this->getMoney();
     Unit * toBuy;
     if(currentMoney >= 20){//buy catapult
-        toBuy = new Catapult();
+        toBuy = new Catapult(*this);
     } else if(currentMoney >= 12){//buy archer
-        toBuy = new Archer();
+        toBuy = new Archer(*this);
     } else if(currentMoney >= 10){//buy soldier
-        toBuy = new Soldier();
+        toBuy = new Soldier(*this);
     } else {
         printf("Trolol tu es pauvre");
         toBuy = nullptr;
@@ -24,4 +24,5 @@ Unit * ArtificialIntelligence::getNextBuy(){
     return toBuy;
 }
 
-ArtificialIntelligence::ArtificialIntelligence(int money, int team, int hp) : Player(money, team, hp) {}
+ArtificialIntelligence::ArtificialIntelligence(
+  int money, int hp, BattlefieldAccessor& bf) : Player(money, hp, bf) {}

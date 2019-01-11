@@ -6,14 +6,15 @@
 #define AGEOFWAR_PLAYER_HPP
 
 
-#include "Unit.hpp"
+#include "Unit.fwd.hpp"
+#include "Battlefield.fwd.hpp"
 
 class Player {
 private:
-    int money, team, hp;
+    int money, hp;
 protected:
     bool spendMoney(int amount);
-    BattlefieldAccessor * bf;
+    BattlefieldAccessor& bf;
 public:
     void addRewardMoney(int reward);
 
@@ -21,10 +22,10 @@ public:
 
     virtual Unit * getNextBuy() = 0;
 
-    BattlefieldAccessor *getBf() const;
+    BattlefieldAccessor& getBf() const;
 
 
-    Player(int money, int team, int hp, BattlefieldAccessor * bf);
+    Player(int money, int hp, BattlefieldAccessor& bf);
 };
 
 
