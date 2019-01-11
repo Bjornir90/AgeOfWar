@@ -9,6 +9,3 @@ void Soldier::resolveAttack() {
 
 }
 
-void Soldier::resolveMovement() {
-
-}

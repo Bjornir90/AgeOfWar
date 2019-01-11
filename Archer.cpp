@@ -8,6 +8,3 @@ void Archer::resolveAttack() {
 
 }
 
-void Archer::resolveMovement() {
-
-}

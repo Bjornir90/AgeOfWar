@@ -11,7 +11,6 @@
 class Archer : public Unit{
 protected:
     void resolveAttack();
-    void resolveMovement();
 
 public:
     Archer(Player* owner) : Unit(8, 8, 3, 12, owner) {
