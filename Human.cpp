@@ -17,12 +17,15 @@ Unit * Human::getNextBuy() {
         if (unitName == "catapult") {
             Catapult *catapult = new Catapult(*this);
             if(spendMoney(catapult->getPrice())) return catapult;
+            delete catapult;
         } else if (unitName == "archer") {
             Archer *archer = new Archer(*this);
             if(spendMoney(archer->getPrice())) return archer;
+            delete archer;
         } else if (unitName == "soldier") {
             Soldier *soldier = new Soldier(*this);
             if(spendMoney(soldier->getPrice())) return soldier;
+            delete soldier;
         } else if (unitName == "superunicorn") {
             //Spawn a special unit
         } else if (unitName == "nothing"){
