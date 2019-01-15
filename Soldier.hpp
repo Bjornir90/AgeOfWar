@@ -6,15 +6,18 @@
 #define AGEOFWAR_SOLDIER_HPP
 
 
-#include "Unit.hpp"
+#include "UnitType.hpp"
 
-class Soldier : public Unit{
-protected:
-    void resolveAttack();
-
+class Soldier : public UnitType{
 public:
-    Soldier(Player& owner) : Unit(10, 10, 4, 10, owner) {
+    Soldier() : UnitType(10, 10, 4) {
     }
+
+    static const Soldier instance;
+
+    void resolveAttack(Unit &u) const override;
+
+    void promote(Unit &u) const override;
 };
 
 

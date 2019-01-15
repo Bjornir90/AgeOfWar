@@ -16,13 +16,14 @@ private:
 
 public:
     int position;
-    const UnitType& type;
+    const UnitType* type;
     Player& owner;
 
     int hurt(int damage);
     int getHp() const;
     inline void resolveAttack();
-    Unit(const UnitType& type, Player& owner);
+    inline void promote();
+    Unit(const UnitType* type, Player& owner);
     virtual ~Unit () = default;
 
 };

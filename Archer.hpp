@@ -3,7 +3,10 @@
 
 class Archer : public UnitType {
 public:
-  Archer();
-  static const Archer instance;
-  void resolveAttack(Unit& u) const;
+    Archer() : UnitType(12, 8, 3){};
+    static const Archer instance;
+
+    void promote(Unit &u) const override;
+
+    void resolveAttack(Unit& u) const;
 };

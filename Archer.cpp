@@ -1,7 +1,5 @@
 #include "Archer.hpp"
 
-Archer::Archer() : UnitType(12, 8) {}
-
 const Archer Archer::instance = Archer();
 
 void Archer::resolveAttack(Unit& u) const {
@@ -14,4 +12,8 @@ void Archer::resolveAttack(Unit& u) const {
         u.owner.addRewardMoney(reward);
         return;
     }
+}
+
+void Archer::promote(Unit &u) const {
+    return;
 }
