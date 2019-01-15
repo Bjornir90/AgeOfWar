@@ -22,6 +22,8 @@ public:
 
     void promote(Unit &u) const override;
 
+    std::string name() override;
+
 };
 
 

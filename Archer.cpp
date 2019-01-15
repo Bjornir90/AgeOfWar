@@ -17,3 +17,7 @@ void Archer::resolveAttack(Unit& u) const {
 void Archer::promote(Unit &u) const {
     return;
 }
+
+std::string Archer::name() {
+    return "Archer";
+}

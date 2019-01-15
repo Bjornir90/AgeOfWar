@@ -9,3 +9,7 @@ void SuperSoldier::resolveAttack(Unit& u) const {
 void SuperSoldier::promote(Unit &u) const {
 
 }
+
+std::string SuperSoldier::name() {
+    return "Super soldier";
+}

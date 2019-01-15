@@ -18,6 +18,8 @@ public:
     void resolveAttack(Unit &u) const override;
 
     void promote(Unit &u) const override;
+
+    std::string name() override;
 };
 
 

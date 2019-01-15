@@ -9,4 +9,6 @@ public:
     void promote(Unit &u) const override;
 
     void resolveAttack(Unit& u) const;
+
+    inline std::string name() override;
 };

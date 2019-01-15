@@ -6,8 +6,9 @@
 #ifndef AGEOFWAR_UNIT_HPP
 #define AGEOFWAR_UNIT_HPP
 
+#include <string>
 #include "Battlefield.hpp"
-#include "UnitType.fwd.hpp"
+#include "UnitType.hpp"
 #include "Player.hpp"
 
 class Unit {
@@ -25,6 +26,12 @@ public:
     inline void promote();
     Unit(const UnitType* type, Player& owner);
     virtual ~Unit () = default;
+    inline std::string name() const {
+        return type->name();
+    }
+    inline std::string printableHP(){
+        return "PV : "<<hp;
+    }
 
 };
 

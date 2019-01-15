@@ -15,3 +15,7 @@ void Soldier::resolveAttack(Unit &u) const {
 void Soldier::promote(Unit &u) const {
     u.type = &SuperSoldier::instance;
 }
+
+std::string Soldier::name() {
+    return "Soldier";
+}

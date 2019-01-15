@@ -7,4 +7,5 @@ public:
   UnitType(int price, int initialHp, int attackDamage);
   virtual void resolveAttack(Unit& u) const = 0;
   virtual void promote(Unit& u) const = 0;
+  virtual std::string name() = 0;
 };
