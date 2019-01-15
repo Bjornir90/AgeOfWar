@@ -1,17 +1,17 @@
-//
-// Created by bjornir on 09/01/19.
-//
-
 #include "Archer.hpp"
 
-void Archer::resolveAttack() {
-    BattlefieldAccessor &bf = owner.getBf();
+Archer::Archer() : UnitType(12, 8) {}
+
+const Archer Archer::instance = Archer();
+
+void Archer::resolveAttack(Unit& u) const {
+    BattlefieldAccessor &bf = u.owner.getBf();
     int reward = 0;
-    for(int i = position+1; i<=position+3; i++){
+    for(int i = u.position+1; i <= u.position+3; i++){
         Unit * unitInCell = bf[i];
         if(unitInCell == nullptr) continue;
-        reward = unitInCell->hurt(attackpower);
-        owner.addRewardMoney(reward);
+        reward = unitInCell->hurt(3);
+        u.owner.addRewardMoney(reward);
         return;
     }
 }
