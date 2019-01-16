@@ -21,3 +21,8 @@ void Archer::promote(Unit &u) const {
 std::string Archer::name() {
     return "Archer";
 }
+
+std::string Archer::generateSaveString() const {
+    std::string save = "archer";
+    return save;
+}

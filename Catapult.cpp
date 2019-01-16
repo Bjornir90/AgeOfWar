@@ -22,3 +22,8 @@ std::string Catapult::name() {
     return "Catapult";
 }
 
+std::string Catapult::generateSaveString() const{
+    std::string save = "catapult";
+    return save;
+}
+

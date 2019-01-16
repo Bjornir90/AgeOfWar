@@ -24,6 +24,7 @@ public:
 
     std::string name() override;
 
+    std::string generateSaveString() const override;
 };
 
 

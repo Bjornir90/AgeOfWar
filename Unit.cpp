@@ -23,4 +23,8 @@ void Unit::promote() {
     type->promote(*this);
 }
 
+std::string Unit::generateSaveString() {
+    std::string save = std::to_string(hp)+"\n"+std::to_string(position)+"\n"+"\n"+type->generateSaveString();
+}
+
 Unit::Unit(const UnitType* type, Player& owner) : hp(type->initialHp), position(0), type(type), owner(owner)  {}

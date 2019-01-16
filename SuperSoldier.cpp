@@ -13,3 +13,8 @@ void SuperSoldier::promote(Unit &u) const {
 std::string SuperSoldier::name() {
     return "Super soldier";
 }
+
+std::string SuperSoldier::generateSaveString() const {
+    std::string save = "supersoldier";
+    return save;
+}

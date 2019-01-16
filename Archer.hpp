@@ -11,4 +11,6 @@ public:
     void resolveAttack(Unit& u) const;
 
     inline std::string name() override;
+
+    std::string generateSaveString() const override;
 };

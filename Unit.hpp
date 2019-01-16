@@ -33,6 +33,8 @@ public:
         return "PV : "<<hp;
     }
 
+    std::string generateSaveString();
+
 };
 
 

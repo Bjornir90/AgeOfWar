@@ -19,3 +19,8 @@ void Soldier::promote(Unit &u) const {
 std::string Soldier::name() {
     return "Soldier";
 }
+
+std::string Soldier::generateSaveString() const {
+    std::string save = "soldier";
+    return save;
+}
