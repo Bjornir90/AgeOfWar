@@ -6,15 +6,23 @@
 #define AGEOFWAR_CATAPULT_HPP
 
 
-#include "Unit.hpp"
+#include "UnitType.hpp"
 
-class Catapult : public Unit{
+class Catapult : public UnitType{
 protected:
     void resolveAttack();
 
 public:
-    Catapult(Player& owner) : Unit(12, 12, 6, 20, owner) {
+    Catapult() : UnitType(12, 20, 6) {
     }
+
+    static const Catapult instance;
+
+    void resolveAttack(Unit &u) const override;
+
+    void promote(Unit &u) const override;
+
+    std::string name() override;
 
 };
 

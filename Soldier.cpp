@@ -3,9 +3,19 @@
 //
 
 #include "Soldier.hpp"
+#include "SuperSoldier.hpp"
 #include "Player.hpp"
 
-void Soldier::resolveAttack() {
+const Soldier Soldier::instance = Soldier();
+
+void Soldier::resolveAttack(Unit &u) const {
 
 }
 
+void Soldier::promote(Unit &u) const {
+    u.type = &SuperSoldier::instance;
+}
+
+std::string Soldier::name() {
+    return "Soldier";
+}

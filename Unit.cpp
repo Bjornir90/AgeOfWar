@@ -3,35 +3,24 @@
 //
 
 #include "Unit.hpp"
+#include "UnitType.hpp"
 
 int Unit::getHp() const {
     return hp;
 }
 
-int Unit::getInitialhp() const {
-    return initialhp;
-}
-
-int Unit::getAttackpower() const {
-    return attackpower;
-}
-
-int Unit::getPrice() const {
-    return price;
-}
-
 int Unit::hurt(int damage){
     hp -= damage;
-    return price/2;
+    if(hp <= 0) return type->price/2;
+    return 0;
 }
 
-int Unit::getPosition() const {
-    return position;
+void Unit::resolveAttack() {
+  type->resolveAttack(*this);
 }
 
-void Unit::setPosition(int position) {
-    Unit::position = position;
+void Unit::promote() {
+    type->promote(*this);
 }
 
-Unit::Unit(int hp, int initialhp, int attackpower, int price, Player& owner) : hp(hp), initialhp(
-        initialhp), attackpower(attackpower), price(price), position(0), owner(owner) {}
+Unit::Unit(const UnitType* type, Player& owner) : hp(type->initialHp), position(0), type(type), owner(owner)  {}

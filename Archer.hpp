@@ -1,21 +1,14 @@
-//
-// Created by bjornir on 09/01/19.
-//
+#pragma once
+#include "UnitType.hpp"
 
-#ifndef AGEOFWAR_ARCHER_HPP
-#define AGEOFWAR_ARCHER_HPP
-
-
-#include "Unit.hpp"
-
-class Archer : public Unit{
-protected:
-    void resolveAttack();
-
+class Archer : public UnitType {
 public:
-    Archer(Player& owner) : Unit(8, 8, 3, 12, owner) {
-    }
+    Archer() : UnitType(12, 8, 3){};
+    static const Archer instance;
+
+    void promote(Unit &u) const override;
+
+    void resolveAttack(Unit& u) const;
+
+    inline std::string name() override;
 };
-
-
-#endif //AGEOFWAR_ARCHER_HPP
