@@ -22,7 +22,7 @@ public:
 
     void promote(Unit &u) const override;
 
-    std::string name() override;
+    std::string name() const override;
 
     std::string generateSaveString() const override;
 };

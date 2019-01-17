@@ -18,7 +18,7 @@ void Archer::promote(Unit &u) const {
     return;
 }
 
-std::string Archer::name() {
+std::string Archer::name() const {
     return "Archer";
 }
 

@@ -10,7 +10,7 @@ void SuperSoldier::promote(Unit &u) const {
 
 }
 
-std::string SuperSoldier::name() {
+std::string SuperSoldier::name() const {
     return "Super soldier";
 }
 

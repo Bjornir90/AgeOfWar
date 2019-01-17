@@ -13,7 +13,7 @@ Unit * Human::getNextBuy() {
     std::string unitName;
     while(true) {
         std::cout<<"Entrez le nom de l'unité à acheter (nothing, catapult, soldier ou archer) :"<<std::endl;
-        std::cin >> unitName;
+        std::cin >> unitName;/*
         if (unitName == "catapult") {
             Catapult *catapult = new Catapult(*this);
             if(spendMoney(catapult->getPrice())) return catapult;
@@ -30,7 +30,7 @@ Unit * Human::getNextBuy() {
             //Spawn a special unit
         } else if (unitName == "nothing"){
             return nullptr;
-        }
+        }*/
         std::cout<<"HÉ T'ES PAUVRE !"<<std::endl;
     }
 }

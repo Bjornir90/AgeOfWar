@@ -18,7 +18,7 @@ void Catapult::promote(Unit &u) const {
     return;
 }
 
-std::string Catapult::name() {
+std::string Catapult::name() const {
     return "Catapult";
 }
 

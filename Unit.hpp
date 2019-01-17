@@ -30,7 +30,7 @@ public:
         return type->name();
     }
     inline std::string printableHP(){
-        return "PV : "<<hp;
+        return "PV : "+std::to_string(hp);
     }
 
     std::string generateSaveString();

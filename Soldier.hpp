@@ -7,6 +7,7 @@
 
 
 #include "UnitType.hpp"
+#include "Unit.hpp"
 
 class Soldier : public UnitType{
 public:
@@ -19,7 +20,7 @@ public:
 
     void promote(Unit &u) const override;
 
-    std::string name() override;
+    std::string name() const override;
 
     std::string generateSaveString() const override;
 };

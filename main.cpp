@@ -30,7 +30,9 @@ void startGame(bool isAI0, bool isAI1){
 
 
 int main() {
+    startGame(false, true);
     Archer *archer = new Archer();
-    std::cout<<archer->generateSaveString()<<std::endl;
+    Unit *unit = new Unit(archer, *player0);
+    std::cout<<unit->generateSaveString()<<std::endl;
     return 0;
 }

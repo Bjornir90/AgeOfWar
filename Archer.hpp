@@ -1,5 +1,9 @@
 #pragma once
-#include "UnitType.hpp"
+
+#include <string>
+#include "UnitType.fwd.hpp"
+#include "Unit.hpp"
+#include "Battlefield.fwd.hpp"
 
 class Archer : public UnitType {
 public:
@@ -10,7 +14,7 @@ public:
 
     void resolveAttack(Unit& u) const;
 
-    inline std::string name() override;
+    inline std::string name() const override;
 
     std::string generateSaveString() const override;
 };

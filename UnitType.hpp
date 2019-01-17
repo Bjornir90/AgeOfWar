@@ -1,5 +1,7 @@
 #pragma once
-#include "Unit.hpp"
+
+#include <string>
+#include "Unit.fwd.hpp"
 
 class UnitType {
 public:
@@ -7,6 +9,6 @@ public:
   UnitType(int price, int initialHp, int attackDamage);
   virtual void resolveAttack(Unit& u) const = 0;
   virtual void promote(Unit& u) const = 0;
-  virtual std::string name() = 0;
+  virtual std::string name() const = 0;
   virtual std::string generateSaveString() const = 0;
 };
