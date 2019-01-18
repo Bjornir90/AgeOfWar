@@ -9,6 +9,10 @@ int Unit::getHp() const {
     return hp;
 }
 
+const UnitType* Unit::getType() const {
+  return type;
+}
+
 int Unit::hurt(int damage){
     hp -= damage;
     if(hp <= 0) return type->price/2;

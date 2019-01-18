@@ -22,10 +22,10 @@ public:
 
     int hurt(int damage);
     int getHp() const;
+    inline const UnitType* getType() const;
     inline void resolveAttack();
     inline void promote();
     Unit(const UnitType* type, Player& owner);
-    virtual ~Unit () = default;
     inline std::string name() const {
         return type->name();
     }
