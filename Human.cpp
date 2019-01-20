@@ -13,25 +13,21 @@ Unit * Human::getNextBuy() {
     std::string unitName;
     while(true) {
         std::cout<<"Entrez le nom de l'unité à acheter (nothing, catapult, soldier ou archer) :"<<std::endl;
-        std::cin >> unitName;/*
+        std::cin >> unitName;
+        Unit *toBuy;
         if (unitName == "catapult") {
-            Catapult *catapult = new Catapult(*this);
-            if(spendMoney(catapult->getPrice())) return catapult;
-            delete catapult;
+           toBuy = new Unit(&Catapult::instance, *this);
         } else if (unitName == "archer") {
-            Archer *archer = new Archer(*this);
-            if(spendMoney(archer->getPrice())) return archer;
-            delete archer;
+            toBuy = new Unit(&Archer::instance, *this);
         } else if (unitName == "soldier") {
-            Soldier *soldier = new Soldier(*this);
-            if(spendMoney(soldier->getPrice())) return soldier;
-            delete soldier;
+            toBuy = new Unit(&Soldier::instance, *this);
         } else if (unitName == "superunicorn") {
             //Spawn a special unit
         } else if (unitName == "nothing"){
             return nullptr;
-        }*/
-        std::cout<<"HÉ T'ES PAUVRE !"<<std::endl;
+        }
+        if(toBuy->type->price <= this->getMoney()) return toBuy;
+        std::cout<<"Tu n'as pas assez d'argent pour acheter cette unité"<<std::endl;
     }
 }
 

@@ -11,16 +11,15 @@
 Unit * ArtificialIntelligence::getNextBuy(){
     int currentMoney = this->getMoney();
     Unit * toBuy;
-    /*if(currentMoney >= 20){//buy catapult
-        toBuy = new Catapult(*this);
+    if(currentMoney >= 20){//buy catapult
+        toBuy = new Unit(&Catapult::instance, *this);
     } else if(currentMoney >= 12){//buy archer
-        toBuy = new Archer(*this);
+        toBuy = new Unit(&Archer::instance, *this);
     } else if(currentMoney >= 10){//buy soldier
-        toBuy = new Soldier(*this);
+        toBuy = new Unit(&Soldier::instance, *this);
     } else {
-        printf("Trolol tu es pauvre");
         toBuy = nullptr;
-    }*/
+    }
     return toBuy;
 }
 

@@ -12,7 +12,7 @@
 
 
 Battlefield::Battlefield() : leftAccess(field), rightAccess(field) {
-  for(uint i = 0; i < BF_SIZE; i++) field[i] = NULL;
+  for(unsigned int i = 0; i < BF_SIZE; i++) field[i] = NULL;
 }
 
 void Battlefield::setPlayers(Player* p0, Player* p1) {
@@ -24,7 +24,7 @@ void Battlefield::_printLoop(std::ostream& strm, const BattlefieldAccessor& bf,
                         std::function<void(Unit*u)> func) const {
                         // void(*func)(std::ostream&, Unit*)) const {
   strm << '|';
-  for(uint i = 0; i < BF_SIZE; i++) {
+  for(unsigned int i = 0; i < BF_SIZE; i++) {
     if(bf[i]) {
       #if BF_COLORS==1
         _printPlayerColor(strm, &(bf[i]->owner));
@@ -37,7 +37,7 @@ void Battlefield::_printLoop(std::ostream& strm, const BattlefieldAccessor& bf,
         strm << BF_DEF_COLOR;
       #endif
     }
-    else for(ushort i=0; i<BF_DISP_WIDTH; i++) strm << ' ';
+    else for(unsigned short i=0; i<BF_DISP_WIDTH; i++) strm << ' ';
 
     strm << '|';
   }
