@@ -26,7 +26,10 @@ Unit * Human::getNextBuy() {
         } else if (unitName == "nothing"){
             return nullptr;
         }
-        if(toBuy->type->price <= this->getMoney()) return toBuy;
+        if(toBuy->type->price <= this->getMoney()){
+            this->spendMoney(toBuy->type->price);
+            return toBuy;
+        }
         std::cout<<"Tu n'as pas assez d'argent pour acheter cette unité"<<std::endl;
     }
 }

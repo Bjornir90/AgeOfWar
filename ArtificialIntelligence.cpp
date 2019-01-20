@@ -18,8 +18,9 @@ Unit * ArtificialIntelligence::getNextBuy(){
     } else if(currentMoney >= 10){//buy soldier
         toBuy = new Unit(&Soldier::instance, *this);
     } else {
-        toBuy = nullptr;
+        return nullptr;
     }
+    this->spendMoney(toBuy->type->price);
     return toBuy;
 }
 
