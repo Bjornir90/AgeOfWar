@@ -3,6 +3,7 @@
 //
 
 #include "Catapult.hpp"
+#include "Battlefield.hpp"
 
 const Catapult Catapult::instance = Catapult();
 

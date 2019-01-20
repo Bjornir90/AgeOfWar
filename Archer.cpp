@@ -2,7 +2,7 @@
 
 const Archer Archer::instance = Archer();
 
-void Archer::resolveAttack(Unit& u) const {
+void Archer::resolveAttack(Unit &u) const {
     BattlefieldAccessor &bf = u.owner.getBf();
     int reward = 0;
     for(int i = u.position+1; i <= u.position+3; i++){

@@ -7,7 +7,7 @@
 
 
 #include "Unit.fwd.hpp"
-#include "Battlefield.fwd.hpp"
+#include "Battlefield.hpp"
 
 class Player {
 private:
@@ -24,8 +24,9 @@ public:
 
     BattlefieldAccessor& getBf() const;
 
-
     Player(int money, int hp, BattlefieldAccessor& bf);
+
+    bool operator==(const Player &other);
 };
 
 

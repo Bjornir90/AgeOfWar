@@ -7,6 +7,7 @@
 
 
 #include "UnitType.hpp"
+#include "Battlefield.hpp"
 
 class Catapult : public UnitType{
 protected:

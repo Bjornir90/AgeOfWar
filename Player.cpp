@@ -24,3 +24,7 @@ bool Player::spendMoney(int amount) {
 BattlefieldAccessor& Player::getBf() const {
     return bf;
 }
+
+bool Player::operator==(const Player &other) {
+    return (bf == other.getBf());
+}

@@ -23,8 +23,8 @@ public:
     int hurt(int damage);
     int getHp() const;
     inline const UnitType* getType() const;
-    inline void resolveAttack();
-    inline void promote();
+    void resolveAttack();
+    void promote();
     Unit(const UnitType* type, Player& owner);
     inline std::string name() const {
         return type->name();

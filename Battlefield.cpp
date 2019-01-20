@@ -65,7 +65,7 @@ void Battlefield::_printPlayerColor(std::ostream& strm, Player* p) const {
   else if(p == p1) strm << BF_P1_COLOR;
 }
 
-BattlefieldAccessor::BattlefieldAccessor(Unit** field) : field(field) {}
+BattlefieldAccessor::BattlefieldAccessor(Unit** field, bool isLeft) : field(field), isLeft(isLeft) {}
 
 Unit*& BattlefieldLeftAccessor::operator [] (int idx) const {
   if(idx < 0 || idx >= BF_SIZE) throw std::out_of_range("The given index exceeds the range of the field.");
@@ -90,4 +90,8 @@ void BattlefieldAccessor::kill (int idx) const {
   if(u == NULL) return;
   delete u;
   u = NULL;
+}
+
+bool BattlefieldAccessor::operator==(const BattlefieldAccessor &rhs) {
+  return isLeft == rhs.isLeft;
 }

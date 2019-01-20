@@ -9,22 +9,26 @@
 class BattlefieldAccessor {
 protected:
   Unit** const field;
-  BattlefieldAccessor(Unit** field);
+  BattlefieldAccessor(Unit** field, bool isLeft);
+  bool isLeft;
 public:
   virtual Unit*& operator [] (int idx) const = 0;
   bool moveFwd(int idx) const;
   void kill(int idx) const;
+
+  bool operator==(const BattlefieldAccessor &rhs);
 };
 
 class BattlefieldLeftAccessor : public BattlefieldAccessor {
 public:
-  BattlefieldLeftAccessor(Unit** f) : BattlefieldAccessor(f) {}
+  BattlefieldLeftAccessor(Unit** f) : BattlefieldAccessor(f, true) {}
   Unit*& operator [] (int idx) const;
+
 };
 
 class BattlefieldRightAccessor : public BattlefieldAccessor {
 public:
-  BattlefieldRightAccessor(Unit** f) : BattlefieldAccessor(f) {}
+  BattlefieldRightAccessor(Unit** f) : BattlefieldAccessor(f, false) {}
   Unit*& operator [] (int idx) const;
 };
 
