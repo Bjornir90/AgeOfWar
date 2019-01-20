@@ -63,6 +63,14 @@ void runTurn(){
             currentUnit->resolveAttack();//TODO check if the unit already attacked (probably add a method in unitType canAttack() to handle all different cases)
         }
     }
+
+    if(bf.leftAccess[0] != nullptr){
+        bf.leftAccess[0] = player0->getNextBuy();
+    }
+
+    if(bf.rightAccess[0] != nullptr){
+        bf.rightAccess[0] = player1->getNextBuy();
+    }
 }
 
 int main() {
