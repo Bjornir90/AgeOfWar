@@ -2,16 +2,20 @@
 
 const Archer Archer::instance = Archer();
 
-void Archer::resolveAttack(Unit &u) const {
+bool Archer::resolveAttack(Unit &u) const {
     BattlefieldAccessor &bf = u.owner.getBf();
     int reward = 0;
     for(int i = u.position+1; i <= u.position+3; i++){
         Unit * unitInCell = bf[i];
         if(unitInCell == nullptr) continue;
-        reward = unitInCell->hurt(3);
-        u.owner.addRewardMoney(reward);
-        return;
+        //Do not attack our own units
+        if(unitInCell->owner != u.owner) {
+            reward = unitInCell->hurt(attackDamage);
+            u.owner.addRewardMoney(reward);
+            return true;
+        }
     }
+    return false;
 }
 
 void Archer::promote(Unit &u) const {

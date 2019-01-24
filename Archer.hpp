@@ -12,7 +12,7 @@ public:
 
     void promote(Unit &u) const override;
 
-    void resolveAttack(Unit &u) const;
+    bool resolveAttack(Unit &u) const;
 
     inline std::string name() const override;
 

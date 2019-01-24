@@ -26,7 +26,9 @@ public:
 
     Player(int money, int hp, BattlefieldAccessor& bf);
 
-    bool operator==(const Player &other);
+    bool operator==(const Player &other) const;
+
+    bool operator!=(const Player &rhs) const;
 };
 
 

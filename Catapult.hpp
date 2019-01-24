@@ -19,7 +19,7 @@ public:
 
     static const Catapult instance;
 
-    void resolveAttack(Unit &u) const override;
+    bool resolveAttack(Unit &u) const override;
 
     void promote(Unit &u) const override;
 

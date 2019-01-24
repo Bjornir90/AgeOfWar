@@ -8,7 +8,8 @@ class UnitType {
 public:
   const int price, initialHp, attackDamage;
   UnitType(int price, int initialHp, int attackDamage);
-  virtual void resolveAttack(Unit &u) const = 0;
+  //return true if the unit has used all its remaining attack for the turn
+  virtual bool resolveAttack(Unit &u) const = 0;
   virtual void promote(Unit& u) const = 0;
   virtual std::string name() const = 0;
   virtual std::string generateSaveString() const = 0;

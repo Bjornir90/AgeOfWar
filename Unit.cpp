@@ -20,7 +20,7 @@ int Unit::hurt(int damage){
 }
 
 void Unit::resolveAttack() {
-  type->resolveAttack(*this);
+    if(canAttack)  canAttack = !type->resolveAttack(*this);
 }
 
 void Unit::promote() {
@@ -33,3 +33,8 @@ std::string Unit::generateSaveString() {
 }
 
 Unit::Unit(const UnitType* type, Player& owner) : hp(type->initialHp), position(0), type(type), owner(owner)  {}
+
+void Unit::newTurn(){
+    canAttack = true;
+}
+

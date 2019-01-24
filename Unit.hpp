@@ -14,6 +14,7 @@
 class Unit {
 private:
     int hp;
+    bool canAttack;
 
 public:
     int position;
@@ -34,6 +35,8 @@ public:
     }
 
     std::string generateSaveString();
+
+    void newTurn();
 
 };
 

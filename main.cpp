@@ -30,6 +30,12 @@ void runTurn(){
     player0->addRewardMoney(8);
     player1->addRewardMoney(8);
 
+    //Reset all units turn
+    for(int unitIndex = 0; unitIndex<BF_SIZE; unitIndex++){
+        Unit * currentUnit = bf.leftAccess[unitIndex];
+        currentUnit->newTurn();
+    }
+
     for(int index = 0; index<BF_SIZE; index++){
         Unit *currentUnit = bf.leftAccess[index];
         //Stop at the first ennemy unit
@@ -43,7 +49,7 @@ void runTurn(){
             if (bf.leftAccess.moveFwd(currentUnit->position)) {
                 currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
             }
-            currentUnit->resolveAttack();//TODO check if the unit already attacked (probably add a method in unitType canAttack() to handle all different cases)
+            currentUnit->resolveAttack();
         }
     }
 
@@ -60,7 +66,7 @@ void runTurn(){
             if (bf.rightAccess.moveFwd(currentUnit->position)) {
                 currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
             }
-            currentUnit->resolveAttack();//TODO check if the unit already attacked (probably add a method in unitType canAttack() to handle all different cases)
+            currentUnit->resolveAttack();
         }
     }
 

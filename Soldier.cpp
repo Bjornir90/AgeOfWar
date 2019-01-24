@@ -8,8 +8,17 @@
 
 const Soldier Soldier::instance = Soldier();
 
-void Soldier::resolveAttack(Unit &u) const {
-
+bool Soldier::resolveAttack(Unit &u) const {
+    BattlefieldAccessor &bf = u.owner.getBf();
+    int reward = 0;
+    Unit * unitInCell = bf[u.position+1];
+    if(unitInCell == nullptr) return false;
+    if(unitInCell->owner != u.owner){
+        reward = unitInCell->hurt(attackDamage);
+        u.owner.addRewardMoney(reward);
+        return true;
+    }
+    return false;
 }
 
 void Soldier::promote(Unit &u) const {
