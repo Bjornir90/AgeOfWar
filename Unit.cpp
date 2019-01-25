@@ -15,7 +15,11 @@ const UnitType* Unit::getType() const {
 
 int Unit::hurt(int damage){
     hp -= damage;
-    if(hp <= 0) return type->price/2;
+    if(hp <= 0){
+        int reward = type->price/2;
+        owner.getBf().kill(position);
+        return reward;
+    }
     return 0;
 }
 

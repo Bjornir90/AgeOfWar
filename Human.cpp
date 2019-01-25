@@ -12,7 +12,7 @@
 Unit * Human::getNextBuy() {
     std::string unitName;
     while(true) {
-        std::cout<<"Entrez le nom de l'unité à acheter (nothing, catapult, soldier ou archer) :"<<std::endl;
+        std::cout<<"Pièces : "<< getMoney() <<"\r\nEntrez le nom de l'unité à acheter (nothing, catapult, soldier ou archer) :"<<std::endl;
         std::cin >> unitName;
         Unit *toBuy;
         if (unitName == "catapult") {

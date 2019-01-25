@@ -15,6 +15,7 @@ bool Soldier::resolveAttack(Unit &u) const {
     if(unitInCell == nullptr) return false;
     if(unitInCell->owner != u.owner){
         reward = unitInCell->hurt(attackDamage);
+        printAttackMove("Soldier", unitInCell);
         u.owner.addRewardMoney(reward);
         return true;
     }

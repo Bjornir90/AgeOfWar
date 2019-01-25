@@ -10,6 +10,7 @@ bool SuperSoldier::resolveAttack(Unit &u) const {
     if(unitInCell == nullptr) return false;
     if(unitInCell->owner != u.owner){
         reward = unitInCell->hurt(attackDamage);
+        printAttackMove("Supersoldier", unitInCell);
         u.owner.addRewardMoney(reward);
     }
     return false;

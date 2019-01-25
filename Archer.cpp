@@ -11,6 +11,7 @@ bool Archer::resolveAttack(Unit &u) const {
         //Do not attack our own units
         if(unitInCell->owner != u.owner) {
             reward = unitInCell->hurt(attackDamage);
+            printAttackMove("Archer", unitInCell);
             u.owner.addRewardMoney(reward);
             return true;
         }

@@ -33,11 +33,13 @@ void runTurn(){
     //Reset all units turn
     for(int unitIndex = 0; unitIndex<BF_SIZE; unitIndex++){
         Unit * currentUnit = bf.leftAccess[unitIndex];
+        if(currentUnit == nullptr) continue;
         currentUnit->newTurn();
     }
 
     for(int index = 0; index<BF_SIZE; index++){
         Unit *currentUnit = bf.leftAccess[index];
+        if(currentUnit == nullptr) continue;
         //Stop at the first ennemy unit
         if(!(currentUnit->owner == *player0)) break;
         currentUnit->resolveAttack();
@@ -45,6 +47,7 @@ void runTurn(){
 
     for(int index = BF_SIZE-1; index>=0; index--) {
         Unit *currentUnit = bf.leftAccess[index];
+        if(currentUnit == nullptr) continue;
         if (currentUnit->owner == *player0) {//So other player units do not advance
             if (bf.leftAccess.moveFwd(currentUnit->position)) {
                 currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
@@ -55,6 +58,7 @@ void runTurn(){
 
     for(int index = 0; index<BF_SIZE; index++){
         Unit *currentUnit = bf.rightAccess[index];
+        if(currentUnit == nullptr) continue;
         //Stop at the first ennemy unit
         if(!(currentUnit->owner == *player1)) break;
         currentUnit->resolveAttack();
@@ -62,6 +66,7 @@ void runTurn(){
 
     for(int index = BF_SIZE-1; index>=0; index--) {
         Unit *currentUnit = bf.rightAccess[index];
+        if(currentUnit == nullptr) continue;
         if (currentUnit->owner == *player1) {//So other player units do not advance
             if (bf.rightAccess.moveFwd(currentUnit->position)) {
                 currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
@@ -70,20 +75,21 @@ void runTurn(){
         }
     }
 
-    if(bf.leftAccess[0] != nullptr){
+    if(bf.leftAccess[0] == nullptr){
         bf.leftAccess[0] = player0->getNextBuy();
     }
 
-    if(bf.rightAccess[0] != nullptr){
+    if(bf.rightAccess[0] == nullptr){
         bf.rightAccess[0] = player1->getNextBuy();
     }
+
+    bf.print(std::cout);
 }
 
 int main() {
     startGame(false, true);
-    bf.leftAccess[0] = new Unit(&(Archer::instance), *player0);
-    bf.rightAccess[0] = new Unit(&(Soldier::instance), *player1);
-    bf.print(std::cout);
-    std::cout << bf.leftAccess[0]->generateSaveString() << std::endl;
+    for(int i = 0; i<500; i++){
+        runTurn();
+    }
     return 0;
 }
