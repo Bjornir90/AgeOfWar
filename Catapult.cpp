@@ -15,22 +15,20 @@ void Catapult::resolveAttack() {
 bool Catapult::resolveAttack(Unit &u) const {
     BattlefieldAccessor &bf = u.owner.getBf();
     int reward = 0;
-    for(int i = u.position+2; i <= u.position+4; i++){
-        Unit * unitInCell = bf[i];
+    for(int i = u.position+2; i < BF_SIZE && i <= u.position+4 ; i++) {
+        Hurtable* unitInCell = bf.getEnnemy(i);
         if (unitInCell == nullptr) continue;
-        if(unitInCell->owner != u.owner) {
-            //Get the other target of the catapult, if the main target is at max range, then the other target is the unit closer to the catapult
-            Unit *otherTarget = (i == u.position + 4) ? bf[i - 1] : bf[i + 1];
-            reward = unitInCell->hurt(attackDamage);
-            printAttackMove("Catapult", unitInCell);
-            //Might add a reward for friendly units killed, is it intended behavior ?
-            if(otherTarget != nullptr) {
-                reward += otherTarget->hurt(attackDamage);
-                printAttackMove("Catapult", otherTarget);
-            }
-            u.owner.addRewardMoney(reward);
-            return true;
+        //Get the other target of the catapult, if the main target is at max range, then the other target is the unit closer to the catapult
+        Hurtable* otherTarget = (i == u.position + 4) ? bf.getEnnemy(i - 1) : bf.getEnnemy(i + 1);
+        reward = unitInCell->hurt(attackDamage);
+        printAttackMove("Catapult", unitInCell);
+        //Might add a reward for friendly units killed, is it intended behavior ?
+        if(otherTarget != nullptr) {
+            reward += otherTarget->hurt(attackDamage);
+            printAttackMove("Catapult", otherTarget);
         }
+        u.owner.addRewardMoney(reward);
+        return true;
     }
     return false;
 }
@@ -47,4 +45,3 @@ std::string Catapult::generateSaveString() const{
     std::string save = "catapult";
     return save;
 }
-
