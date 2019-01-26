@@ -74,8 +74,10 @@ BattlefieldAccessor::BattlefieldAccessor(Unit** field) : field(field) {}
 Hurtable* BattlefieldAccessor::getEnnemy(int idx) const {
   Unit* u = (*this)[idx];
 
-  if(idx == BF_SIZE-1 && u == nullptr)
-    return oppositeBase;
+  if(u == nullptr) {
+    if(idx == BF_SIZE-1) return oppositeBase;
+    return nullptr;
+  }
 
   if(u->owner.getBf() != *this)
     return u;
@@ -94,7 +96,7 @@ Unit*& BattlefieldRightAccessor::operator [] (int idx) const {
 }
 
 bool BattlefieldAccessor::moveFwd (int idx) const {
-  if(idx < 0 || idx >= BF_SIZE - 2) throw std::out_of_range("The given index exceeds the range of field, or unit will exceed allowed position if moved.");
+  if(idx < 0 || idx >= BF_SIZE - 2) return false;
   if((*this)[idx+1] != NULL) return false;
   (*this)[idx+1] = (*this)[idx];
   (*this)[idx] = NULL;
