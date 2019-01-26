@@ -6,13 +6,11 @@ const SuperSoldier SuperSoldier::instance = SuperSoldier();
 bool SuperSoldier::resolveAttack(Unit &u) const {
     BattlefieldAccessor &bf = u.owner.getBf();
     int reward = 0;
-    Unit * unitInCell = bf[u.position+1];
+    Hurtable* unitInCell = bf.getEnnemy(u.position+1);
     if(unitInCell == nullptr) return false;
-    if(unitInCell->owner != u.owner){
-        reward = unitInCell->hurt(attackDamage);
-        printAttackMove("Supersoldier", unitInCell);
-        u.owner.addRewardMoney(reward);
-    }
+    reward = unitInCell->hurt(attackDamage);
+    printAttackMove("Supersoldier", unitInCell);
+    u.owner.addRewardMoney(reward);
     return false;
 }
 

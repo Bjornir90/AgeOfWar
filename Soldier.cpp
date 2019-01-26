@@ -11,15 +11,12 @@ const Soldier Soldier::instance = Soldier();
 bool Soldier::resolveAttack(Unit &u) const {
     BattlefieldAccessor &bf = u.owner.getBf();
     int reward = 0;
-    Unit * unitInCell = bf[u.position+1];
+    Hurtable* unitInCell = bf.getEnnemy(u.position+1);
     if(unitInCell == nullptr) return false;
-    if(unitInCell->owner != u.owner){
-        reward = unitInCell->hurt(attackDamage);
-        printAttackMove("Soldier", unitInCell);
-        u.owner.addRewardMoney(reward);
-        return true;
-    }
-    return false;
+    reward = unitInCell->hurt(attackDamage);
+    printAttackMove("Soldier", unitInCell);
+    u.owner.addRewardMoney(reward);
+    return true;
 }
 
 void Soldier::promote(Unit &u) const {
