@@ -7,13 +7,14 @@
 #define AGEOFWAR_UNIT_HPP
 
 #include <string>
+#include "Hurtable.hpp"
 #include "Battlefield.hpp"
 #include "UnitType.hpp"
 #include "Player.hpp"
 
-class Unit {
+class Unit : public Hurtable {
 private:
-    int hp;
+
     bool canAttack;
 
 public:
@@ -22,7 +23,6 @@ public:
     Player& owner;
 
     int hurt(int damage);
-    int getHp() const;
     inline const UnitType* getType() const;
     void resolveAttack();
     void promote();
@@ -31,7 +31,7 @@ public:
         return type->name();
     }
     inline std::string printableHP(){
-        return "PV : "+std::to_string(hp);
+        return std::to_string(hp)+"PV";
     }
 
     std::string generateSaveString();

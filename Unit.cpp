@@ -5,17 +5,13 @@
 #include "Unit.hpp"
 #include "UnitType.hpp"
 
-int Unit::getHp() const {
-    return hp;
-}
 
 const UnitType* Unit::getType() const {
   return type;
 }
 
 int Unit::hurt(int damage){
-    hp -= damage;
-    if(hp <= 0){
+    if(Hurtable::hurt(damage)) {
         int reward = type->price/2;
         owner.getBf().kill(position);
         return reward;
@@ -36,9 +32,8 @@ std::string Unit::generateSaveString() {
     return save;
 }
 
-Unit::Unit(const UnitType* type, Player& owner) : hp(type->initialHp), position(0), type(type), owner(owner)  {}
+Unit::Unit(const UnitType* type, Player& owner) : Hurtable(type->initialHp), position(0), type(type), owner(owner)  {}
 
 void Unit::newTurn(){
     canAttack = true;
 }
-

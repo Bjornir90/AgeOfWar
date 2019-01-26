@@ -9,7 +9,7 @@ void Player::addRewardMoney(int reward) {
     this->money += reward;
 }
 
-Player::Player(int money, int hp, BattlefieldAccessor& bf) : money(money), hp(hp), bf(bf) {}
+Player::Player(int money, int hp, BattlefieldAccessor& bf) : money(money), bf(bf), base(hp) {}
 
 int Player::getMoney() const {
     return money;

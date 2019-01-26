@@ -2,13 +2,14 @@
 #include <stdexcept>
 #include "Unit.hpp"
 #include <iomanip>
+#include "Player.hpp"
 
 #define BF_DISP_WIDTH 12 // display width (in chars) of one cell for print()
 #define BF_COLORS 1 // enable or disable color display
 
 #define BF_P0_COLOR "\033[32m" // customize colors for player0
-#define BF_P1_COLOR "\033[34m" // player1
-#define BF_DEF_COLOR "\033[39m" // initial color
+#define BF_P1_COLOR "\033[33m" // player1
+#define BF_DEF_COLOR "\033[0m" // initial color
 
 
 Battlefield::Battlefield() : leftAccess(field), rightAccess(field) {
@@ -18,11 +19,12 @@ Battlefield::Battlefield() : leftAccess(field), rightAccess(field) {
 void Battlefield::setPlayers(Player* p0, Player* p1) {
   this->p0 = p0;
   this->p1 = p1;
+  leftAccess.oppositeBase = &(p1->base);
+  rightAccess.oppositeBase = &(p0->base);
 }
 
 void Battlefield::_printLoop(std::ostream& strm, const BattlefieldAccessor& bf,
                         std::function<void(Unit*u)> func) const {
-                        // void(*func)(std::ostream&, Unit*)) const {
   strm << '|';
   for(unsigned int i = 0; i < BF_SIZE; i++) {
     if(bf[i]) {
@@ -47,6 +49,8 @@ void Battlefield::_printLoop(std::ostream& strm, const BattlefieldAccessor& bf,
 
 void Battlefield::print(std::ostream& strm, const BattlefieldAccessor& bf) const {
 
+  std::cout << "Player 1: " << p0->base.getHp() << std::endl;
+  std::cout << "Player 2: " << p1->base.getHp() << std::endl;
   _printLoop(strm, bf, [&](Unit* u)->void{
     if(&(u->owner) == p0) strm << "P1";
     else if(&(u->owner) == p1) strm << "P2";
@@ -65,7 +69,19 @@ void Battlefield::_printPlayerColor(std::ostream& strm, Player* p) const {
   else if(p == p1) strm << BF_P1_COLOR;
 }
 
-BattlefieldAccessor::BattlefieldAccessor(Unit** field, bool isLeft) : field(field), isLeft(isLeft) {}
+BattlefieldAccessor::BattlefieldAccessor(Unit** field) : field(field) {}
+
+Hurtable* BattlefieldAccessor::getEnnemy(int idx) const {
+  Unit* u = (*this)[idx];
+
+  if(idx == BF_SIZE-1 && u == nullptr)
+    return oppositeBase;
+
+  if(u->owner.getBf() != *this)
+    return u;
+
+  return nullptr;
+}
 
 Unit*& BattlefieldLeftAccessor::operator [] (int idx) const {
   if(idx < 0 || idx >= BF_SIZE) throw std::out_of_range("The given index exceeds the range of the field.");
@@ -92,6 +108,10 @@ void BattlefieldAccessor::kill (int idx) const {
   u = NULL;
 }
 
-bool BattlefieldAccessor::operator==(const BattlefieldAccessor &rhs) {
-  return isLeft == rhs.isLeft;
+bool BattlefieldAccessor::operator==(const BattlefieldAccessor &rhs) const {
+  return this == &rhs;
+}
+
+bool BattlefieldAccessor::operator!=(const BattlefieldAccessor &rhs) const {
+  return !(*this == rhs);
 }

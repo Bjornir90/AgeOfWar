@@ -8,14 +8,17 @@
 
 #include "Unit.fwd.hpp"
 #include "Battlefield.hpp"
+#include "Base.hpp"
 
 class Player {
 private:
-    int money, hp;
+    int money;
 protected:
     bool spendMoney(int amount);
     BattlefieldAccessor& bf;
 public:
+    Base base;
+
     void addRewardMoney(int reward);
 
     int getMoney() const;

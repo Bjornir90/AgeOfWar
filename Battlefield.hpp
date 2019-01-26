@@ -1,7 +1,8 @@
 #pragma once
 #include "Battlefield.fwd.hpp"
 #include "Unit.fwd.hpp"
-#include "Player.fwd.hpp" // no need for more..
+#include "Player.fwd.hpp"
+#include "Base.hpp"
 #include <iostream>
 #include <functional>
 #include <utility>
@@ -9,26 +10,27 @@
 class BattlefieldAccessor {
 protected:
   Unit** const field;
-  BattlefieldAccessor(Unit** field, bool isLeft);
-  bool isLeft;
+  Base* oppositeBase;
+  BattlefieldAccessor(Unit** field);
+  friend class Battlefield;
 public:
   virtual Unit*& operator [] (int idx) const = 0;
+  virtual Hurtable* getEnnemy(int idx) const;
   bool moveFwd(int idx) const;
   void kill(int idx) const;
-
-  bool operator==(const BattlefieldAccessor &rhs);
+  bool operator==(const BattlefieldAccessor& rhs) const;
+  bool operator!=(const BattlefieldAccessor& rhs) const;
 };
 
 class BattlefieldLeftAccessor : public BattlefieldAccessor {
 public:
-  BattlefieldLeftAccessor(Unit** f) : BattlefieldAccessor(f, true) {}
+  BattlefieldLeftAccessor(Unit** f) : BattlefieldAccessor(f) {}
   Unit*& operator [] (int idx) const;
-
 };
 
 class BattlefieldRightAccessor : public BattlefieldAccessor {
 public:
-  BattlefieldRightAccessor(Unit** f) : BattlefieldAccessor(f, false) {}
+  BattlefieldRightAccessor(Unit** f) : BattlefieldAccessor(f) {}
   Unit*& operator [] (int idx) const;
 };
 
