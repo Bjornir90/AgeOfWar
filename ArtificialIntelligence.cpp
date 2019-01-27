@@ -26,3 +26,7 @@ Unit * ArtificialIntelligence::getNextBuy(){
 
 ArtificialIntelligence::ArtificialIntelligence(
   int money, int hp, int side, BattlefieldAccessor& bf) : Player(money, hp, side, bf) {}
+
+bool ArtificialIntelligence::isAI() {
+    return true;
+}

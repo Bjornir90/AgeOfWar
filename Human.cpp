@@ -38,3 +38,7 @@ Unit * Human::getNextBuy() {
 }
 
 Human::Human(int money, int hp, int side, BattlefieldAccessor& bf) : Player(money, hp, side, bf) {}
+
+bool Human::isAI() {
+    return false;
+}

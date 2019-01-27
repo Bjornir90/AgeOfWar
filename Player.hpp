@@ -26,6 +26,8 @@ public:
 
     virtual Unit * getNextBuy() = 0;
 
+    virtual bool isAI() = 0;
+
     BattlefieldAccessor& getBf() const;
 
     Player(int money, int hp, int side, BattlefieldAccessor& bf);

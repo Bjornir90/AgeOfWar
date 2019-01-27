@@ -37,7 +37,7 @@ public:
 
     std::string generateSaveString();
 
-    static Unit *loadFromStream(std::ifstream saveFile, Player *player0, Player *player1);
+    static Unit *loadFromStream(std::ifstream &saveFile, Player *player0, Player *player1);
 
     void newTurn();
 

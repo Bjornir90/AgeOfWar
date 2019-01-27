@@ -33,7 +33,7 @@ void Unit::promote() {
 
 std::string Unit::generateSaveString() {
     int side = owner.getSide();
-    std::string save = std::to_string(hp)+"\n"+std::to_string(position)+"\n"+type->generateSaveString()+"\n"+std::to_string(side);//format is hp; position; typename; side, with newline in place of ;
+    std::string save = std::to_string(hp)+"\n"+std::to_string(position)+"\n"+type->generateSaveString()+"\n"+std::to_string(side)+"\n";//format is hp; position; typename; side, with newline in place of ;
     return save;
 }
 
@@ -43,7 +43,7 @@ void Unit::newTurn(){
     canAttack = true;
 }
 
-Unit * Unit::loadFromStream(std::ifstream saveFile, Player *player0, Player *player1) {
+Unit * Unit::loadFromStream(std::ifstream &saveFile, Player *player0, Player *player1) {
     std::string input;
     int savedPosition, savedHp, filePosition = 0;
     const UnitType *savedType;

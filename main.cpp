@@ -86,6 +86,65 @@ void runTurn(){
     bf.print(std::cout);
 }
 
+void loadGame(std::string fileName){
+    std::ifstream savedFile(fileName);
+    bool hasLoadedPlayers = false;
+    while(!savedFile.eof()){
+        if(!hasLoadedPlayers){
+            std::string line;
+            int filePosition = 0, savedMoney, savedHp, savedIsAi;
+            for(int playerIndex = 0; playerIndex<2; playerIndex++) {
+                while (std::getline(savedFile, line)) {
+                    switch (filePosition) {
+                        case 0:
+                            filePosition++;
+                            savedMoney = std::stoi(line);
+                            break;
+                        case 1:
+                            filePosition++;
+                            savedHp = std::stoi(line);
+                            break;
+                        case 2:
+                            savedIsAi = std::stoi(line);
+                            if(playerIndex == 0){
+                                if(savedIsAi == 0) {
+                                    player0 = new Human(savedMoney, savedHp, playerIndex, bf.leftAccess);
+                                } else {
+                                    player0 = new ArtificialIntelligence(savedMoney, savedHp, playerIndex, bf.leftAccess);
+                                }
+                            } else {
+                                if(savedIsAi == 0) {
+                                    player1 = new Human(savedMoney, savedHp, playerIndex, bf.rightAccess);
+                                } else {
+                                    player1 = new ArtificialIntelligence(savedMoney, savedHp, playerIndex, bf.rightAccess);
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+            hasLoadedPlayers = true;
+        }
+        Unit::loadFromStream(savedFile, player0, player1);
+    }
+}
+
+void savePlayer(Player *player, std::ofstream &saveFile){
+    saveFile<<std::to_string(player->base.getHp())+"\n"+std::to_string(player->getMoney())+"\n"+((player->isAI())?"1":"0")+"\n";
+}
+
+void saveGame(){
+    std::ofstream saveFile("save.aow");
+    savePlayer(player0, saveFile);
+    savePlayer(player1, saveFile);
+    for(int unitIndex = 0; unitIndex<BF_SIZE; unitIndex++){
+        Unit * currentUnit = bf.leftAccess[unitIndex];
+        if(currentUnit == nullptr) continue;
+        saveFile<<currentUnit->generateSaveString();
+    }
+}
+
+
 int main() {
     startGame(false, true);
     for(int i = 0; i<500; i++){

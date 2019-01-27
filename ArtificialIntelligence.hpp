@@ -12,6 +12,8 @@ class ArtificialIntelligence : public Player {
 public:
     Unit * getNextBuy();
 
+    bool isAI() override;
+
     ArtificialIntelligence(int money, int hp, int side, BattlefieldAccessor& bf);
 };
 
