@@ -84,6 +84,7 @@ Unit * Unit::loadFromStream(std::ifstream &saveFile, Player *player0, Player *pl
                 loadedUnit->hp = savedHp;
                 loadedUnit->position = savedPosition;
                 savedOwner->getBf()[savedPosition] = loadedUnit;
+                std::cout<<"Unit loaded : "+std::to_string(savedHp)+" hp; pos : "+std::to_string(savedPosition)+"; type : "+savedType->name()<<std::endl;
                 return loadedUnit;
         }
     }

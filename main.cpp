@@ -25,51 +25,49 @@ void startGame(bool isAI0, bool isAI1){
     bf.setPlayers(player0, player1);
 }
 
+Player *loadPlayer(std::ifstream &savedFile, bool isLeft){
+    int filePosition = 0, savedMoney = -1, savedHp = -1, savedIsAi = -1;
+    std::string line;
+    Player *loadedPlayer;
+    while (std::getline(savedFile, line)) {
+        switch (filePosition) {
+            case 0:
+                filePosition++;
+                savedMoney = std::stoi(line);
+                break;
+            case 1:
+                filePosition++;
+                savedHp = std::stoi(line);
+                break;
+            case 2:
+                savedIsAi = std::stoi(line);
+                    if(savedIsAi == 0) {
+                        loadedPlayer = new Human(savedMoney, savedHp, (isLeft)?0:1, (isLeft)?(BattlefieldAccessor&)bf.leftAccess:(BattlefieldAccessor&)bf.rightAccess);
+                    } else {
+                        loadedPlayer = new ArtificialIntelligence(savedMoney, savedHp, (isLeft)?0:1, (isLeft)?(BattlefieldAccessor&)bf.leftAccess:(BattlefieldAccessor&)bf.rightAccess);
+                    }
+                return loadedPlayer;
+        }
+    }
+}
+
 void loadGame(std::string fileName){
     std::ifstream savedFile(fileName);
     bool hasLoadedPlayers = false;
     while(!savedFile.eof()){
         if(!hasLoadedPlayers){
-            std::string line;
-            int filePosition = 0, savedMoney, savedHp, savedIsAi;
-            for(int playerIndex = 0; playerIndex<2; playerIndex++) {
-                while (std::getline(savedFile, line)) {
-                    switch (filePosition) {
-                        case 0:
-                            filePosition++;
-                            savedMoney = std::stoi(line);
-                            break;
-                        case 1:
-                            filePosition++;
-                            savedHp = std::stoi(line);
-                            break;
-                        case 2:
-                            savedIsAi = std::stoi(line);
-                            if(playerIndex == 0){
-                                if(savedIsAi == 0) {
-                                    player0 = new Human(savedMoney, savedHp, playerIndex, bf.leftAccess);
-                                } else {
-                                    player0 = new ArtificialIntelligence(savedMoney, savedHp, playerIndex, bf.leftAccess);
-                                }
-                            } else {
-                                if(savedIsAi == 0) {
-                                    player1 = new Human(savedMoney, savedHp, playerIndex, bf.rightAccess);
-                                } else {
-                                    player1 = new ArtificialIntelligence(savedMoney, savedHp, playerIndex, bf.rightAccess);
-                                }
-                            }
-                            break;
-                    }
-                }
-            }
             hasLoadedPlayers = true;
+            player0 = loadPlayer(savedFile, true);
+            player1 = loadPlayer(savedFile, false);
+            bf.setPlayers(player0, player1);
         }
         Unit::loadFromStream(savedFile, player0, player1);
     }
+    bf.print(std::cout);
 }
 
 void savePlayer(Player *player, std::ofstream &saveFile){
-    saveFile<<std::to_string(player->base.getHp())+"\n"+std::to_string(player->getMoney())+"\n"+((player->isAI())?"1":"0")+"\n";
+    saveFile<<std::to_string(player->getMoney())+"\n"+std::to_string(player->base.getHp())+"\n"+((player->isAI())?"1":"0")+"\n";
 }
 
 void saveGame(){
@@ -107,6 +105,8 @@ void runTurn(){
     //money for each turn
     player0->addRewardMoney(8);
     player1->addRewardMoney(8);
+
+    bf.print(std::cout);
 
     //Reset all units turn
     for(int unitIndex = 0; unitIndex<BF_SIZE; unitIndex++){
@@ -163,7 +163,6 @@ void runTurn(){
         bf.rightAccess[0] = player1->getNextBuy();
     }
 
-    bf.print(std::cout);
 }
 
 
