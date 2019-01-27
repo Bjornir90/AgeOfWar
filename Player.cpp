@@ -9,7 +9,7 @@ void Player::addRewardMoney(int reward) {
     this->money += reward;
 }
 
-Player::Player(int money, int hp, BattlefieldAccessor& bf) : money(money), bf(bf), base(hp) {}
+Player::Player(int money, int hp, int side, BattlefieldAccessor& bf) : money(money), bf(bf), side(side), base(hp) {}
 
 int Player::getMoney() const {
     return money;
@@ -31,4 +31,8 @@ bool Player::operator==(const Player &other) const {
 
 bool Player::operator!=(const Player &rhs) const {
     return !(rhs == *this);
+}
+
+int Player::getSide() const {
+    return side;
 }

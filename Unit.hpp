@@ -7,6 +7,7 @@
 #define AGEOFWAR_UNIT_HPP
 
 #include <string>
+#include <fstream>
 #include "Hurtable.hpp"
 #include "Battlefield.hpp"
 #include "UnitType.hpp"
@@ -35,6 +36,8 @@ public:
     }
 
     std::string generateSaveString();
+
+    static Unit *loadFromStream(std::ifstream saveFile, Player *player0, Player *player1);
 
     void newTurn();
 

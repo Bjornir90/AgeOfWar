@@ -12,7 +12,7 @@ class ArtificialIntelligence : public Player {
 public:
     Unit * getNextBuy();
 
-    ArtificialIntelligence(int money, int hp, BattlefieldAccessor& bf);
+    ArtificialIntelligence(int money, int hp, int side, BattlefieldAccessor& bf);
 };
 
 

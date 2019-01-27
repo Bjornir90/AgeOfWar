@@ -37,4 +37,4 @@ Unit * Human::getNextBuy() {
     }
 }
 
-Human::Human(int money, int hp, BattlefieldAccessor& bf) : Player(money, hp, bf) {}
+Human::Human(int money, int hp, int side, BattlefieldAccessor& bf) : Player(money, hp, side, bf) {}

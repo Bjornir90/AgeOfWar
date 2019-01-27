@@ -12,9 +12,10 @@
 
 class Player {
 private:
-    int money;
+    int money, side;//0 for left, 1 for right
 protected:
     bool spendMoney(int amount);
+
     BattlefieldAccessor& bf;
 public:
     Base base;
@@ -27,7 +28,9 @@ public:
 
     BattlefieldAccessor& getBf() const;
 
-    Player(int money, int hp, BattlefieldAccessor& bf);
+    Player(int money, int hp, int side, BattlefieldAccessor& bf);
+
+    int getSide() const;
 
     bool operator==(const Player &other) const;
 

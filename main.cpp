@@ -13,14 +13,14 @@ Battlefield bf;
 
 void startGame(bool isAI0, bool isAI1){
     if(isAI0)
-        player0 = new ArtificialIntelligence(STARTING_MONEY, STARTING_HP, bf.leftAccess);
+        player0 = new ArtificialIntelligence(STARTING_MONEY, STARTING_HP, 0, bf.leftAccess);
     else
-        player0 = new Human(STARTING_MONEY, STARTING_HP, bf.leftAccess);
+        player0 = new Human(STARTING_MONEY, STARTING_HP, 0, bf.leftAccess);
 
     if(isAI1)
-        player1 = new ArtificialIntelligence(STARTING_MONEY, STARTING_HP, bf.rightAccess);
+        player1 = new ArtificialIntelligence(STARTING_MONEY, STARTING_HP, 1, bf.rightAccess);
     else
-        player1 = new Human(STARTING_MONEY, STARTING_HP, bf.rightAccess);
+        player1 = new Human(STARTING_MONEY, STARTING_HP, 1, bf.rightAccess);
 
     bf.setPlayers(player0, player1);
 }

@@ -12,7 +12,7 @@ class Human : public Player{
 public:
     Unit * getNextBuy() override;
 
-    Human(int money, int hp, BattlefieldAccessor& bf);
+    Human(int money, int hp, int side, BattlefieldAccessor& bf);
 };
 
 
