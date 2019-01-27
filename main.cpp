@@ -25,67 +25,6 @@ void startGame(bool isAI0, bool isAI1){
     bf.setPlayers(player0, player1);
 }
 
-void runTurn(){
-    //money for each turn
-    player0->addRewardMoney(8);
-    player1->addRewardMoney(8);
-
-    //Reset all units turn
-    for(int unitIndex = 0; unitIndex<BF_SIZE; unitIndex++){
-        Unit * currentUnit = bf.leftAccess[unitIndex];
-        if(currentUnit == nullptr) continue;
-        currentUnit->newTurn();
-    }
-
-    for(int index = 0; index<BF_SIZE; index++){
-        Unit *currentUnit = bf.leftAccess[index];
-        if(currentUnit == nullptr) continue;
-        //Stop at the first ennemy unit
-        if(!(currentUnit->owner == *player0)) break;
-        currentUnit->resolveAttack();
-    }
-
-    for(int index = BF_SIZE-1; index>=0; index--) {
-        Unit *currentUnit = bf.leftAccess[index];
-        if(currentUnit == nullptr) continue;
-        if (currentUnit->owner == *player0) {//So other player units do not advance
-            if (bf.leftAccess.moveFwd(currentUnit->position)) {
-                currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
-            }
-            currentUnit->resolveAttack();
-        }
-    }
-
-    for(int index = 0; index<BF_SIZE; index++){
-        Unit *currentUnit = bf.rightAccess[index];
-        if(currentUnit == nullptr) continue;
-        //Stop at the first ennemy unit
-        if(!(currentUnit->owner == *player1)) break;
-        currentUnit->resolveAttack();
-    }
-
-    for(int index = BF_SIZE-1; index>=0; index--) {
-        Unit *currentUnit = bf.rightAccess[index];
-        if(currentUnit == nullptr) continue;
-        if (currentUnit->owner == *player1) {//So other player units do not advance
-            if (bf.rightAccess.moveFwd(currentUnit->position)) {
-                currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
-            }
-            currentUnit->resolveAttack();
-        }
-    }
-
-    if(bf.leftAccess[0] == nullptr){
-        bf.leftAccess[0] = player0->getNextBuy();
-    }
-
-    if(bf.rightAccess[0] == nullptr){
-        bf.rightAccess[0] = player1->getNextBuy();
-    }
-
-    bf.print(std::cout);
-}
-
 void loadGame(std::string fileName){
     std::ifstream savedFile(fileName);
     bool hasLoadedPlayers = false;
@@ -142,6 +81,89 @@ void saveGame(){
         if(currentUnit == nullptr) continue;
         saveFile<<currentUnit->generateSaveString();
     }
+    saveFile.close();
+}
+
+void promptForSave(){
+    std::cout<<"Do you wish to save or load the game (s:l:n)?"<<std::endl;
+    std::string response;
+    while(true){
+        std::cin>>response;
+        if(response == "s"){
+            saveGame();
+            return;
+        } else if(response == "l"){
+            loadGame("save.aow");
+            return;
+        } else if(response == "n"){
+            return;
+        } else {
+            std::cout<<"Entrée invalide, merci de répondre à nouveau :"<<std::endl;
+        }
+    }
+}
+
+void runTurn(){
+    //money for each turn
+    player0->addRewardMoney(8);
+    player1->addRewardMoney(8);
+
+    //Reset all units turn
+    for(int unitIndex = 0; unitIndex<BF_SIZE; unitIndex++){
+        Unit * currentUnit = bf.leftAccess[unitIndex];
+        if(currentUnit == nullptr) continue;
+        currentUnit->newTurn();
+    }
+
+    for(int index = 0; index<BF_SIZE; index++){
+        Unit *currentUnit = bf.leftAccess[index];
+        if(currentUnit == nullptr) continue;
+        //Stop at the first ennemy unit
+        if(!(currentUnit->owner == *player0)) break;
+        currentUnit->resolveAttack();
+    }
+
+    for(int index = BF_SIZE-1; index>=0; index--) {
+        Unit *currentUnit = bf.leftAccess[index];
+        if(currentUnit == nullptr) continue;
+        if (currentUnit->owner == *player0) {//So other player units do not advance
+            if (bf.leftAccess.moveFwd(currentUnit->position)) {
+                currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
+            }
+            currentUnit->resolveAttack();
+        }
+    }
+
+    for(int index = 0; index<BF_SIZE; index++){
+        Unit *currentUnit = bf.rightAccess[index];
+        if(currentUnit == nullptr) continue;
+        //Stop at the first ennemy unit
+        if(!(currentUnit->owner == *player1)) break;
+        currentUnit->resolveAttack();
+    }
+
+    for(int index = BF_SIZE-1; index>=0; index--) {
+        Unit *currentUnit = bf.rightAccess[index];
+        if(currentUnit == nullptr) continue;
+        if (currentUnit->owner == *player1) {//So other player units do not advance
+            if (bf.rightAccess.moveFwd(currentUnit->position)) {
+                currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
+            }
+            currentUnit->resolveAttack();
+        }
+    }
+
+    promptForSave();
+
+    if(bf.leftAccess[0] == nullptr){
+        bf.leftAccess[0] = player0->getNextBuy();
+    }
+
+    if(bf.rightAccess[0] == nullptr){
+        bf.rightAccess[0] = player1->getNextBuy();
+    }
+
+    bf.print(std::cout);
 }
 
 
