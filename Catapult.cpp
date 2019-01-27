@@ -19,7 +19,7 @@ bool Catapult::resolveAttack(Unit &u) const {
         Hurtable* unitInCell = bf.getEnnemy(i);
         if (unitInCell == nullptr) continue;
         //Get the other target of the catapult, if the main target is at max range, then the other target is the unit closer to the catapult
-        Hurtable* otherTarget = (i == u.position + 4) ? bf.getEnnemy(i - 1) : bf.getEnnemy(i + 1);
+        Hurtable* otherTarget = (i == u.position + 4 || i==BF_SIZE-1) ? bf.getEnnemy(i - 1) : bf.getEnnemy(i + 1);
         reward = unitInCell->hurt(attackDamage);
         printAttackMove("Catapult", unitInCell);
         //Might add a reward for friendly units killed, is it intended behavior ?
