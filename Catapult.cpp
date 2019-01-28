@@ -8,21 +8,19 @@
 
 const Catapult Catapult::instance = Catapult();
 
-void Catapult::resolveAttack() {
-
-}
-
 bool Catapult::resolveAttack(Unit &u) const {
     BattlefieldAccessor &bf = u.owner.getBf();
     int reward = 0;
     for(int i = u.position+2; i < BF_SIZE && i <= u.position+4 ; i++) {
         Hurtable* unitInCell = bf.getEnnemy(i);
         if (unitInCell == nullptr) continue;
+        //Catapult can not move after having attacked
+        u.canMove = false;
         //Get the other target of the catapult, if the main target is at max range, then the other target is the unit closer to the catapult
         Hurtable* otherTarget = (i == u.position + 4 || i==BF_SIZE-1) ? bf.getEnnemy(i - 1) : bf.getEnnemy(i + 1);
         reward = unitInCell->hurt(attackDamage);
         printAttackMove("Catapult", unitInCell);
-        //Might add a reward for friendly units killed, is it intended behavior ?
+        //Add a reward both for friendly and ennemy units killed
         if(otherTarget != nullptr) {
             reward += otherTarget->hurt(attackDamage);
             printAttackMove("Catapult", otherTarget);
@@ -30,7 +28,8 @@ bool Catapult::resolveAttack(Unit &u) const {
         u.owner.addRewardMoney(reward);
         return true;
     }
-    return false;
+    //return true, even if the catapult hasn't attacked, so it isn't trying to attack a second time
+    return true;
 }
 
 void Catapult::promote(Unit &u) const {

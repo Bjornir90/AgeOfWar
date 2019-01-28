@@ -41,6 +41,7 @@ Unit::Unit(const UnitType* type, Player& owner) : Hurtable(type->initialHp), pos
 
 void Unit::newTurn(){
     canAttack = true;
+    canMove = true;
 }
 
 Unit * Unit::loadFromStream(std::ifstream &saveFile, Player *player0, Player *player1) {
@@ -88,4 +89,8 @@ Unit * Unit::loadFromStream(std::ifstream &saveFile, Player *player0, Player *pl
                 return loadedUnit;
         }
     }
+}
+
+bool Unit::isCapableOfMoving() const {
+    return canMove;
 }

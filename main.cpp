@@ -135,6 +135,7 @@ void runTurn(){
         currentUnit->newTurn();
     }
 
+    //player0 (left) units attack
     std::cout << std::endl << Color(P0_COLOR);
     for(int index = 0; index<BF_SIZE; index++){
         Unit *currentUnit = bf.leftAccess[index];
@@ -144,6 +145,7 @@ void runTurn(){
         currentUnit->resolveAttack();
     }
 
+    //player0 (left) units moves, then attacks, if they didn't the first time
     for(int index = BF_SIZE-1; index>=0; index--) {
         Unit *currentUnit = bf.leftAccess[index];
         if(currentUnit == nullptr) continue;
@@ -155,6 +157,7 @@ void runTurn(){
         }
     }
 
+    //player1 (right) units attack
     std::cout << Color(P1_COLOR);
     for(int index = 0; index<BF_SIZE; index++){
         Unit *currentUnit = bf.rightAccess[index];
@@ -164,6 +167,7 @@ void runTurn(){
         currentUnit->resolveAttack();
     }
 
+    //player1 (right) units moves, then attacks, if they didn't the first time
     for(int index = BF_SIZE-1; index>=0; index--) {
         Unit *currentUnit = bf.rightAccess[index];
         if(currentUnit == nullptr) continue;

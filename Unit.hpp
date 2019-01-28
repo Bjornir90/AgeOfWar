@@ -17,6 +17,9 @@ class Unit : public Hurtable {
 private:
 
     bool canAttack;
+protected:
+
+    bool canMove;
 
 public:
     int position;
@@ -40,6 +43,11 @@ public:
     static Unit *loadFromStream(std::ifstream &saveFile, Player *player0, Player *player1);
 
     void newTurn();
+
+    bool isCapableOfMoving() const;
+
+    //Give the catapult access to the canMove attribute
+    friend class Catapult;
 
 };
 
