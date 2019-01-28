@@ -68,6 +68,7 @@ void loadGame(std::string fileName){
         //we load every units from the stream, with the just loaded players
         Unit::loadFromStream(savedFile, player0, player1);
     }
+    bf.print(std::cout);
 }
 
 void savePlayer(Player *player, std::ofstream &saveFile){
@@ -114,19 +115,6 @@ void runTurn(){
     player1->addRewardMoney(8);
 
     bf.print(std::cout);
-    std::cout << std::endl;
-
-    if(bf.leftAccess[0] == nullptr){
-        std::cout << Color(P0_COLOR) << "[Player1] ";
-        bf.leftAccess[0] = player0->getNextBuy();
-        std::cout << Color::reset << std::endl;
-    }
-
-    if(bf.rightAccess[0] == nullptr){
-        std::cout << Color(P1_COLOR) << "[Player2] ";
-        bf.rightAccess[0] = player1->getNextBuy();
-        std::cout << Color::reset;
-    }
 
     //Reset all units turn
     for(int unitIndex = 0; unitIndex<BF_SIZE; unitIndex++){
@@ -176,9 +164,24 @@ void runTurn(){
     }
 
     std::cout << Color::reset << std::endl;
-
-
     promptForSave();
+
+    if(bf.leftAccess[0] == nullptr){
+        std::cout << std::endl << Color(P0_COLOR) << "[Player1] ";
+        std::cout.flush();
+        bf.leftAccess[0] = player0->getNextBuy();
+        std::cout << Color::reset;
+    }
+
+    if(bf.rightAccess[0] == nullptr){
+        std::cout << std::endl << Color(P1_COLOR) << "[Player2] ";
+        std::cout.flush();
+        bf.rightAccess[0] = player1->getNextBuy();
+        std::cout << Color::reset;
+    }
+
+    std::cout << std::endl;
+    for(unsigned short i = 0; i < BF_SIZE*(BF_DISP_WIDTH+1)+1; i++) std::cout << '=';
     std::cout << std::endl << std::endl;
 
 }

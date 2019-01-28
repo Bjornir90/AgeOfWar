@@ -1,6 +1,6 @@
 EXEC=ageOfWar
 CXX=g++
-CXXFLAGS=-Wall -Wextra -std=c++14
+CXXFLAGS=-Wall -Wextra -Wno-unused-parameter -std=c++14
 
 SRCS := $(wildcard *.cpp)
 OBJS := $(SRCS:.cpp=.o)
@@ -13,7 +13,7 @@ $(EXEC): $(OBJS)
 	$(CXX) $^ -o $@
 
 %.o: %.cpp
-	$(CXX) -MM -MF $(patsubst %.o,%.d,$@) $<
+	$(CXX) $(CXXFLAGS) -MM -MF $(patsubst %.o,%.d,$@) $<
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
 -include $(DEPS)
