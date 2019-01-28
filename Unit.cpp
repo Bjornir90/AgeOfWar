@@ -89,6 +89,7 @@ Unit * Unit::loadFromStream(std::ifstream &saveFile, Player *player0, Player *pl
                 return loadedUnit;
         }
     }
+    return nullptr;
 }
 
 bool Unit::isCapableOfMoving() const {

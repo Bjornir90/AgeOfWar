@@ -7,10 +7,12 @@
 #include "Catapult.hpp"
 #include "Archer.hpp"
 #include "Soldier.hpp"
+#include <unistd.h>
 
 Unit * ArtificialIntelligence::getNextBuy(){
     int currentMoney = this->getMoney();
     Unit * toBuy;
+    sleep(1);
     if(currentMoney >= 20){//buy catapult
         toBuy = new Unit(&Catapult::instance, *this);
         std::cout << "Catapult" << std::endl;
