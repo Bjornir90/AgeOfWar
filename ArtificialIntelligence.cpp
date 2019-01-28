@@ -13,11 +13,15 @@ Unit * ArtificialIntelligence::getNextBuy(){
     Unit * toBuy;
     if(currentMoney >= 20){//buy catapult
         toBuy = new Unit(&Catapult::instance, *this);
+        std::cout << "Catapult" << std::endl;
     } else if(currentMoney >= 12){//buy archer
         toBuy = new Unit(&Archer::instance, *this);
+        std::cout << "Archer" << std::endl;
     } else if(currentMoney >= 10){//buy soldier
         toBuy = new Unit(&Soldier::instance, *this);
+        std::cout << "Soldier" << std::endl;
     } else {
+        std::cout << "Nothing" << std::endl;
         return nullptr;
     }
     this->spendMoney(toBuy->type->price);

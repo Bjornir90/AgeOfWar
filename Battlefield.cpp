@@ -25,23 +25,18 @@ void Battlefield::setPlayers(Player* p0, Player* p1) {
 
 void Battlefield::_printLoop(std::ostream& strm, const BattlefieldAccessor& bf,
                         std::function<void(Unit*u)> func) const {
-  strm << '|';
+  strm << "│";
   for(unsigned int i = 0; i < BF_SIZE; i++) {
     if(bf[i]) {
-      #if BF_COLORS==1
-        _printPlayerColor(strm, &(bf[i]->owner));
-      #endif
 
+      strm << _getUnitColor(bf[i]);
       strm << std::setfill(' ') << std::left << std::setw(BF_DISP_WIDTH);
       func(bf[i]);
-
-      #if BF_COLORS==1
-        strm << BF_DEF_COLOR;
-      #endif
+      strm << Color::reset;
     }
     else for(unsigned short i=0; i<BF_DISP_WIDTH; i++) strm << ' ';
 
-    strm << '|';
+    strm << "│";
   }
   strm << std::endl;
 }
@@ -49,25 +44,43 @@ void Battlefield::_printLoop(std::ostream& strm, const BattlefieldAccessor& bf,
 
 void Battlefield::print(std::ostream& strm, const BattlefieldAccessor& bf) const {
 
-  std::cout << "Player 1: " << p0->base.getHp() << std::endl;
-  std::cout << "Player 2: " << p1->base.getHp() << std::endl;
-  _printLoop(strm, bf, [&](Unit* u)->void{
-    if(&(u->owner) == p0) strm << "P1";
-    else if(&(u->owner) == p1) strm << "P2";
-  });
+  std::cout << Color(P0_COLOR, "Player1: ", false) << p0->base.getHp() << " PV" << Color::reset;
+
+  for(unsigned short i = 0; i < (BF_SIZE-2)*(BF_DISP_WIDTH+1)-2; i++) strm << ' ';
+  std::cout << Color(P1_COLOR, "Player2: ", false) << p1->base.getHp() << " PV" << Color::reset << std::endl;
+
+  strm << "┌";
+  for(unsigned int i = 0; i < BF_SIZE*(BF_DISP_WIDTH+1)-1; i++) strm << "─";
+  strm << "┐" << std::endl;
+
+  #if COLOR_ENABLED == 0
+    _printLoop(strm, bf, [&](Unit* u)->void{
+      if(&u->owner == p0) strm << "P1";
+      else if(&u->owner == p1) strm << "P2";
+    });
+  #endif
+
   _printLoop(strm, bf, [&](Unit* u)->void{strm << u->name();});
   _printLoop(strm, bf, [&](Unit* u)->void{strm << u->printableHP();});
 
+  strm << "└";
+  for(unsigned int i = 0; i < BF_SIZE*(BF_DISP_WIDTH+1)-1; i++) strm << "─";
+  strm << "┘" << std::endl;
 }
 
 void Battlefield::print(std::ostream& strm) const {
   print(strm, leftAccess);
 }
 
-void Battlefield::_printPlayerColor(std::ostream& strm, Player* p) const {
-  if(p == p0) strm << BF_P0_COLOR;
-  else if(p == p1) strm << BF_P1_COLOR;
+const Color Battlefield::_getUnitColor(Unit* u) const {
+  if(&u->owner == p0) return Color(P0_COLOR);
+  else return Color(P1_COLOR);
 }
+
+
+/////////////////////////////////////
+//////// BattlefieldAccessor ////////
+/////////////////////////////////////
 
 BattlefieldAccessor::BattlefieldAccessor(Unit** field) : field(field) {}
 
@@ -111,7 +124,7 @@ void BattlefieldAccessor::kill (int idx) const {
 }
 
 bool BattlefieldAccessor::operator==(const BattlefieldAccessor &rhs) const {
-  return this == &rhs;
+  return this == &rhs; // comparing addresses is enough
 }
 
 bool BattlefieldAccessor::operator!=(const BattlefieldAccessor &rhs) const {

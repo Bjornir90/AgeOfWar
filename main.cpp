@@ -107,6 +107,19 @@ void runTurn(){
     player1->addRewardMoney(8);
 
     bf.print(std::cout);
+    std::cout << std::endl;
+
+    if(bf.leftAccess[0] == nullptr){
+        std::cout << Color(P0_COLOR) << "[Player1] ";
+        bf.leftAccess[0] = player0->getNextBuy();
+        std::cout << Color::reset << std::endl;
+    }
+
+    if(bf.rightAccess[0] == nullptr){
+        std::cout << Color(P1_COLOR) << "[Player2] ";
+        bf.rightAccess[0] = player1->getNextBuy();
+        std::cout << Color::reset;
+    }
 
     //Reset all units turn
     for(int unitIndex = 0; unitIndex<BF_SIZE; unitIndex++){
@@ -115,6 +128,7 @@ void runTurn(){
         currentUnit->newTurn();
     }
 
+    std::cout << std::endl << Color(P0_COLOR);
     for(int index = 0; index<BF_SIZE; index++){
         Unit *currentUnit = bf.leftAccess[index];
         if(currentUnit == nullptr) continue;
@@ -134,6 +148,7 @@ void runTurn(){
         }
     }
 
+    std::cout << Color(P1_COLOR);
     for(int index = 0; index<BF_SIZE; index++){
         Unit *currentUnit = bf.rightAccess[index];
         if(currentUnit == nullptr) continue;
@@ -153,15 +168,11 @@ void runTurn(){
         }
     }
 
+    std::cout << Color::reset << std::endl;
+
+
     promptForSave();
-
-    if(bf.leftAccess[0] == nullptr){
-        bf.leftAccess[0] = player0->getNextBuy();
-    }
-
-    if(bf.rightAccess[0] == nullptr){
-        bf.rightAccess[0] = player1->getNextBuy();
-    }
+    std::cout << std::endl << std::endl;
 
 }
 
@@ -170,6 +181,14 @@ int main() {
     startGame(false, true);
     for(int i = 0; i<500; i++){
         runTurn();
+        if(player0->base.getHp() <= 0) {
+          std::cout << std::endl << Color(P1_COLOR, "Player 2 wins !") << std::endl;
+          return 0;
+        }
+        else if(player1->base.getHp() <= 0) {
+          std::cout << std::endl << Color(P0_COLOR, "Player 1 wins !") << std::endl;
+          return 0;
+        }
     }
     return 0;
 }

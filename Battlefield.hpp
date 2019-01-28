@@ -3,9 +3,14 @@
 #include "Unit.fwd.hpp"
 #include "Player.fwd.hpp"
 #include "Base.hpp"
+#include "Color.hpp"
 #include <iostream>
 #include <functional>
 #include <utility>
+
+#define P0_COLOR Color::GREEN // display color of player0
+#define P1_COLOR Color::BRIGHT_RED // and of player1
+
 
 class BattlefieldAccessor {
 protected:
@@ -39,8 +44,8 @@ public:
 class Battlefield {
 private:
   Unit* field[BF_SIZE];
-  Player* p0, *p1;
-  void _printPlayerColor(std::ostream& strm, Player* p) const;
+  Player *p0, *p1;
+  const Color _getUnitColor(Unit* u) const;
   void _printLoop(std::ostream& strm, const BattlefieldAccessor& bf, std::function<void(Unit*u)>) const;
 public:
   Battlefield();
