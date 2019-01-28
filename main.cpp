@@ -31,14 +31,17 @@ Player *loadPlayer(std::ifstream &savedFile, bool isLeft){
     Player *loadedPlayer;
     while (std::getline(savedFile, line)) {
         switch (filePosition) {
+            //money is first in the file
             case 0:
                 filePosition++;
                 savedMoney = std::stoi(line);
                 break;
+            //hp is second
             case 1:
                 filePosition++;
                 savedHp = std::stoi(line);
                 break;
+            //and then we check if the player was an AI or not
             case 2:
                 savedIsAi = std::stoi(line);
                     if(savedIsAi == 0) {
@@ -57,23 +60,27 @@ void loadGame(std::string fileName){
     while(!savedFile.eof()){
         if(!hasLoadedPlayers){
             hasLoadedPlayers = true;
+            //first we have to load the players, so we can set them in units
             player0 = loadPlayer(savedFile, true);
             player1 = loadPlayer(savedFile, false);
             bf.setPlayers(player0, player1);
         }
+        //we load every units from the stream, with the just loaded players
         Unit::loadFromStream(savedFile, player0, player1);
     }
-    bf.print(std::cout);
 }
 
 void savePlayer(Player *player, std::ofstream &saveFile){
     saveFile<<std::to_string(player->getMoney())+"\n"+std::to_string(player->base.getHp())+"\n"+((player->isAI())?"1":"0")+"\n";
 }
 
+//Save the whole game
 void saveGame(){
     std::ofstream saveFile("save.aow");
+    //save the players
     savePlayer(player0, saveFile);
     savePlayer(player1, saveFile);
+    //save every units
     for(int unitIndex = 0; unitIndex<BF_SIZE; unitIndex++){
         Unit * currentUnit = bf.leftAccess[unitIndex];
         if(currentUnit == nullptr) continue;
@@ -83,17 +90,17 @@ void saveGame(){
 }
 
 void promptForSave(){
-    std::cout<<"Do you wish to save or load the game (s:l:n)?"<<std::endl;
+    std::cout<<"Voulez vous charger, sauvegarder ou ne rien faire (s:c:r)?"<<std::endl;
     std::string response;
     while(true){
         std::cin>>response;
         if(response == "s"){
             saveGame();
             return;
-        } else if(response == "l"){
+        } else if(response == "c"){
             loadGame("save.aow");
             return;
-        } else if(response == "n"){
+        } else if(response == "r"){
             return;
         } else {
             std::cout<<"Entrée invalide, merci de répondre à nouveau :"<<std::endl;
@@ -142,7 +149,7 @@ void runTurn(){
         if(currentUnit == nullptr) continue;
         if (currentUnit->owner == *player0) {//So other player units do not advance
             if (bf.leftAccess.moveFwd(currentUnit->position)) {
-                currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
+                currentUnit->position++;
             }
             currentUnit->resolveAttack();
         }
@@ -162,7 +169,7 @@ void runTurn(){
         if(currentUnit == nullptr) continue;
         if (currentUnit->owner == *player1) {//So other player units do not advance
             if (bf.rightAccess.moveFwd(currentUnit->position)) {
-                currentUnit->position++;//TODO add a method in battlefield so the unit actually reproduce the same movement
+                currentUnit->position++;
             }
             currentUnit->resolveAttack();
         }

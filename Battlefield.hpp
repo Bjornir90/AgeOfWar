@@ -11,7 +11,8 @@
 #define P0_COLOR Color::GREEN // display color of player0
 #define P1_COLOR Color::BRIGHT_RED // and of player1
 
-
+/*Class that allows access to the battlefield, is abstract because you can only get one of the child : left or right,
+which determine at which end of the battlefield the origin is */
 class BattlefieldAccessor {
 protected:
   Unit** const field;

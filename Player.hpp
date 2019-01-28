@@ -24,6 +24,7 @@ public:
 
     int getMoney() const;
 
+    //return the unit chosen by the player, with the prompt and input handled inside the function, or the unit the AI will buy.
     virtual Unit * getNextBuy() = 0;
 
     virtual bool isAI() = 0;
