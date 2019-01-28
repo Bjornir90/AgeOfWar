@@ -8,6 +8,7 @@
 #include <functional>
 #include <utility>
 
+#define BF_DISP_WIDTH 12 // display width (in chars) of one cell for print()
 #define P0_COLOR Color::GREEN // display color of player0
 #define P1_COLOR Color::BRIGHT_RED // and of player1
 
@@ -53,6 +54,5 @@ public:
   BattlefieldLeftAccessor leftAccess;
   BattlefieldRightAccessor rightAccess;
   void setPlayers(Player* p0, Player* p1);
-  void print(std::ostream& strm, const BattlefieldAccessor& bf) const;
   void print(std::ostream& strm) const;
 };

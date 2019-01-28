@@ -4,13 +4,10 @@
 #include <iomanip>
 #include "Player.hpp"
 
-#define BF_DISP_WIDTH 12 // display width (in chars) of one cell for print()
-#define BF_COLORS 1 // enable or disable color display
 
-#define BF_P0_COLOR "\033[32m" // customize colors for player0
-#define BF_P1_COLOR "\033[33m" // player1
-#define BF_DEF_COLOR "\033[0m" // initial color
-
+/////////////////////////////////////
+//////////// Battlefield ////////////
+/////////////////////////////////////
 
 Battlefield::Battlefield() : leftAccess(field), rightAccess(field) {
   for(unsigned int i = 0; i < BF_SIZE; i++) field[i] = NULL;
@@ -42,7 +39,9 @@ void Battlefield::_printLoop(std::ostream& strm, const BattlefieldAccessor& bf,
 }
 
 
-void Battlefield::print(std::ostream& strm, const BattlefieldAccessor& bf) const {
+void Battlefield::print(std::ostream& strm) const {
+
+  const BattlefieldAccessor& bf = leftAccess;
 
   std::cout << Color(P0_COLOR, "Player1: ", false) << p0->base.getHp() << " PV" << Color::reset;
 
@@ -66,10 +65,6 @@ void Battlefield::print(std::ostream& strm, const BattlefieldAccessor& bf) const
   strm << "└";
   for(unsigned int i = 0; i < BF_SIZE*(BF_DISP_WIDTH+1)-1; i++) strm << "─";
   strm << "┘" << std::endl;
-}
-
-void Battlefield::print(std::ostream& strm) const {
-  print(strm, leftAccess);
 }
 
 const Color Battlefield::_getUnitColor(Unit* u) const {
