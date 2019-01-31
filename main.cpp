@@ -58,6 +58,10 @@ Player *loadPlayer(std::ifstream &savedFile, bool isLeft){
 void loadGame(std::string fileName){
     std::ifstream savedFile(fileName);
     bool hasLoadedPlayers = false;
+    //reset the board
+    for(int i=0; i<BF_SIZE; i++){
+        bf.leftAccess[i] = nullptr;
+    }
     while(!savedFile.eof()){
         if(!hasLoadedPlayers){
             hasLoadedPlayers = true;
