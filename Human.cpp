@@ -14,22 +14,22 @@ Unit * Human::getNextBuy() {
     while(true) {
         std::cout<<"Pièces : "<< getMoney() <<"\r\nEntrez le nom de l'unité à acheter (rien, catapulte, soldat ou archer) :"<<std::endl;
         std::cin >> unitName;
-        Unit *toBuy;
+        UnitType const* toBuy;
         if (unitName == "catapulte" || unitName == "c") {
-           toBuy = new Unit(&Catapult::instance, *this);
+          toBuy = &Catapult::instance;
         } else if (unitName == "archer" || unitName == "a") {
-            toBuy = new Unit(&Archer::instance, *this);
+          toBuy = &Archer::instance;
         } else if (unitName == "soldat" || unitName == "s") {
-            toBuy = new Unit(&Soldier::instance, *this);
+          toBuy = &Soldier::instance;
         } else if (unitName == "rien" || unitName == "r"){
-            return nullptr;
+          return nullptr;
         } else {
             std::cout << "Ce nom n'est pas valide"<<std::endl;
             continue;
         }
-        if(toBuy->type->price <= this->getMoney()){
-            this->spendMoney(toBuy->type->price);
-            return toBuy;
+        if(toBuy->price <= this->getMoney()){
+            this->spendMoney(toBuy->price);
+            return new Unit(toBuy, *this);
         }
         std::cout<<"Tu n'as pas assez d'argent pour acheter cette unité"<<std::endl;
     }
